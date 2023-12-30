@@ -1,244 +1,456 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title></title>
-		<style>
-		*{
-		margin:0;	
-		padding: 0;	
-			
-		}	
-			
-			#a{
-	   position:absolute;
-				width: 100px;
-				height: 50px;
-				border:3px solid red;
-				top:150px;
-				left:0px;
-				font-size:2vw;
+		<title>五子棋wlq</title>
+		<style  type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
 			}
-			#c{
-			position:absolute;	
-				width: 100px;
-				height: 50px;
-				border:3px solid red;
-				top:150px;
-				left:700px;
-				font-size:2vw;
+			body{
+				background:#898a50;
+				cursor:pointer;
 			}
-			#b{
-			position:absolute;	
-			width:50px;	
-			height:50px;
-			border: 3px solid red;
-			border-radius:10px;
-			   top:150px;
-			   left:300px;
-			   font-size:2.5vw;
-			}
-			#background{
-				position: absolute;
-				width:100%;
-				height: 100vh;
-				background:rgba(0,0,0,0.5);
-			}
-			#background1{
-				position: absolute;
-				left:150px;
-				top:200px;
-				width:300px;
-				height:250px;
-				background:white;
-				z-index:1;
-				font-size:2.5vw;
-			}
-#background2{
-	
-	position: absolute;
-	left:280px;
-	top:340px;
-	border:3px solid red;
-	z-index:1;
+#father{
+	   display: flex;
+	width:98%;
+	height:100vh;
+	 justify-content: center;
+	              align-items: center;		
 }
-h1{
-	
+#son{
+	display: flex;
+	justify-content: center;
+	             align-items: center;
 	text-align: center;
-	color:greenyellow;
-	
+	width: 200px;
+	height:50px;
+	border: 3px solid  #fff;
+								
+	border-radius:9px;
+	text-shadow: 1px 1px 1px #ccc,
+	                       0 0 10px #fff,
+	                       0 0 20px #fff,
+	                       0 0 30px #fff,
+	                       0 0 40px #ff00de,
+	                       0 0 70px #ff00de,
+	                       0 0 80px #ff00de,
+	                       0 0 100px #ff00de,
+	                       0 0 150px #ff00de;
+								
+								color:#fff;
+								
 }
-button{
-	position:absolute;
-	background:khaki;
-	 width:50px;
-	color:black;
-	top:400px;
+#son:hover{
+	background:#ff90de;
 }
-#b1{
-	left:250px;
-	
+#qipanbk{
+	   display: flex;
+	width:98%;
+	height:100vh;
+	 justify-content: center;
+	              align-items: center;		
 }
-#b2{
-	left:300px;
-	
+#qipanbkSON{
+	border: 2px solid #ff90de;
 }
-#b3{
-	left:350px;
-	
+.qipan{
+	  display: flex;
+	float: left;
+	border:2px solid #ff90de;
+	justify-content: center;
+	             align-items: center;	
 }
-#b4{
-	left:400px;
-	
+#kzf{
+	display: flex;
+	justify-content: center;
+	             align-items: center;	
+				 text-align: center;
 }
-.ok{
+#tc{
 	position: absolute;
-	width:100px;
-	height:100px;
-	border:2px solid red;
-	left:500px;
-	top:500px;
-	
+	top:10px;
+	left:10px;
+	border:2px solid #fff;
+	border-radius:6px;
+	color:#fff ;
+	box-shadow: 1px 1px 1px #ccc,
+	                       0 0 10px #fff,
+	                       0 0 20px #fff,
+	                       0 0 30px #fff,
+	                       0 0 40px #ff90de,
+	                       0 0 70px #ff90de,
+	                       0 0 80px #ff90de,
+	                       0 0 100px #ff90de,
+	                       0 0 150px #ff90de;
+						   background: #212120;
 }
-.jd{
-	display:none;
-	position:absolute;
-	top:603px;
-	left:500px;
-	width:100px;
-	height:28px;
-	border:2px solid darkgrey;
-	z-index:-1;
-}
-.oks{
-	position:absolute;
-	width:0px;
-	height:30px;
-	left:500px;
-	top:604px;
-	background:green;
-}
-#jd{
-	display:none;
-	position:absolute;
-	top:605px;
-	left:542px;
-	color:indianred;
-	font-size:1.5vw;
-	
+#js{
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	             align-items: center;	
+				 background: #212120;
+				 width:100%;
+				 height:100vh;
+				 top:0;
+				 font-size:90px;
+				 color:#fff ;
 }
 		</style>
+		<script>
+		/*	Math.sin()
+			Math.cos()
+			Math.tan()
+			*/
+		   window.onload=function()
+		   {
+			   var ks=0
+			   var kzfSIZE=null
+			   var SON =document.getElementById("son")
+			   var SONsize=null//字体大小 
+			   var qipanbkSONWidth=null
+			   var qipanbkSONHeight=null
+			   window.addEventListener('selectstart', function(e) {
+			   		  e.preventDefault();
+			   		});
+					if (/(Android)/i.test(navigator.userAgent)) {
+					       // console.log('安卓端')
+					    SONsize=28
+						qipanbkSONHeight=300
+						qipanbkSONWidth=300
+						kzfSIZE=30
+		var meta = document.querySelector("meta")
+		meta.charset="utf-8" 
+		meta.name="viewport"
+		meta.content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		}else{
+			//PC
+			kzfSIZE=30
+			SONsize=30
+			qipanbkSONHeight=300
+			qipanbkSONWidth=300
+		}
+		SON.style.fontSize=SONsize+"px"
+		SON.onclick=function(){
+			if(document.fullscreenEnabled){
+				ks+=1
+				document.documentElement.requestFullscreen();
+				if(ks%2==0){
+				game()
+				}
+			}else{
+				alert("你未支持全屏模式！")
+			}
+		}
+		function game(){
+			
+			var background=document.createElement("div")
+			background.style.width=100+"%"
+			background.style.height=100+"vh"
+			background.style.background="#dedfe1"
+			background.style.zIndex=3
+			background.style.position="absolute"
+			background.style.top=0
+			background.id="backgrounfd"
+			document.body.appendChild(background)
+			pygame()
+		}
+		function pygame(){
+			var gzf=false
+			var qipanbk=document.createElement("div")
+			var qipanbkSON=document.createElement("div")
+			var kzf=document.createElement("div")
+			var tc=document.createElement("div")
+			tc.id="tc"
+			tc.style.width=60+"px"
+			tc.style.height=40+"px"
+			tc.style.fontSize=30+"px"
+			tc.innerHTML="返回"
+			tc.style.zIndex=3
+			for(var i = 0;i<9;i++){
+				var qipan=document.createElement("div")
+				qipan.className="qipan"
+				qipan.style.width=qipanbkSONWidth/3-3.3+"px"
+				qipan.style.height=qipanbkSONHeight/3-3+"px"
+				qipan.style.fontSize=qipanbkSONWidth/3-5+"px"
+				qipan.innerHTML=" "
+				qipanbkSON.appendChild(qipan)
+			}
+			kzf.style.height=(qipanbkSONWidth/3-3.3)*2+"px"
+			kzf.style.position="absolute"
+			kzf.style.width=98+"%"
+			kzf.style.zIndex=3
+			kzf.style.color="#f89"
+			kzf.style.textAlign="center"
+			kzf.style.top=0
+			kzf.innerHTML="<h1>716</h1><h4>己方</h4>持子"
+			kzf.style.fontSize=kzfSIZE+"px"
+			kzf.id="kzf"
+			qipanbk.id="qipanbk"
+			qipanbkSON.id="qipanbkSON"
+			qipanbk.style.zIndex=3
+			qipanbk.style.position="absolute"
+			qipanbk.style.top=0
+			
+			qipanbkSON.style.width=qipanbkSONWidth+"px"
+			qipanbkSON.style.height=qipanbkSONHeight+"px"
+			document.body.appendChild(qipanbk)
+			
+			document.body.appendChild(kzf)
+			document.body.appendChild(tc)
+			qipanbk.appendChild(qipanbkSON)
+			
+		var qizhi=document.querySelectorAll(".qipan")
+		var time=setInterval(()=>{
+			var IF=""
+			var IF2=0
+			for(var d = 0;d<qizhi.length;d++){
+				IF+=qizhi[d].innerHTML
+			}
+			for(var g =0;g<=IF.length;g++){
+				if(IF[g]=="X"){
+					IF2+=1
+				}
+			}
+			if(gzf){
+				kzf.innerHTML="<h1>716</h1><h4>己方</h4>持子"
+				gzf=false
+				//console.log(IF2)
+				if(IF2==1){
+					var wz = Math.floor(Math.random()*IF.length)
+					if(wz==IF.indexOf("X")){
+						wz+=1
+						qizhi[wz].innerHTML="O"
+						kzf.innerHTML="<h1>716</h1><h4>己方</h4>持子"
+					}else{
+					qizhi[wz].innerHTML="O"
+					kzf.innerHTML="<h1>716</h1><h4>己方</h4>持子"
+					}
+				}else{
+					//AI下法
+					var AI=""
+					for(var d = 0;d<qizhi.length;d++){
+						AI+=qizhi[d].innerHTML
+					}
+					for(var t=0;t<AI.length;t++){
+						var tz=t
+						if(AI[t]=="X"||AI[t]=="O"){
+							if(AI[t]==AI[t+=1]){
+								if(this.innerHTML!="O"&&this.innerHTML!="X"){
+									qizhi[t+=1].innerHTML="O"
+								}
+							
+								
+							}else{
+								t=tz
+								
+							}
+						}
+						if(AI[t]=="X"||AI[t]=="O"){
+							if(t!=0){
+							if(AI[t]==AI[t+=2]){
+						
+								if(t+2>9){
+									if(AI[3]!="O"&&AI[3]!="X"){
+										qizhi[3].innerHTML="O"
+									}
+								}else{
+									if(AI[t+2].innerHTML!="O"&&AI[t+2]!="X"){
+										qizhi[t+=2].innerHTML="O"
+									}
+								}
+			
+							}else{
+								t=tz
+								
+							}
+							}
+						}
+					if(AI[t]=="X"||AI[t]=="O"){
+						if(AI[t]==AI[t+=3]){
+							if(t+3>9){
+								if(AI[3].innerHTML!="O"&&AI[3]!="X"){
+									qizhi[3].innerHTML="O"
+								}
+								
+							}else{
+						if(AI[t+3].innerHTML!="O"&&AI[t+3]!="X"){
+							qizhi[t+=3].innerHTML="O"
+						}
+							}
+						}else{
+							t=tz
+							
+						}
+					}
+					if(AI[t]=="X"||AI[t]=="O"){
+						if(AI[t]==AI[t+=4]){
+						if(t+4>9){
+							if(AI[0].innerHTML!="O"&&AI[0]!="X"){
+								qizhi[0].innerHTML="O"
+							}
+								
+							}else{
+						if(AI[t+4].innerHTML!="O"&&AI[t+4]!="X"){
+							qizhi[t+=4].innerHTML="O"
+						}
+							}
+							
+						}else{
+							t=tz
+							
+							
+						}
+					}
+						
+					}
+					
+				}
+					
+				
+				
+			}
+				
+		},1000)
+		var IFTIE=setInterval(()=>{
+			//判断程序
+			var IF=""
+			for(var d = 0;d<qizhi.length;d++){
+				IF+=qizhi[d].innerHTML
+			}
+		    for(var t=0;t<IF.length;t++){
+				var tz=t
+				if(IF[t]=="X"||IF[t]=="O"){
+					if(t%3==0){
+					if(IF[t]==IF[t+=1]){
+						if(IF[t]==IF[t+=1]){
+							
+							if(IF[t]=="X"){
+								jsyouxi("玩家胜利")
+							}else{
+								jsyouxi("AI胜利")
+							}
+							clearInterval(IFTIE)
+						}else{
+						t=tz
+					      }
+					}else{
+						t=tz
+					}
+				}
+				}
+				if(IF[t]=="X"||IF[t]=="O"){
+					if(t==2){
+					if(IF[t]==IF[t+=2]){
+						if(IF[t]==IF[t+=2]){
+						
+						if(IF[t]=="X"){
+							jsyouxi("玩家胜利")
+						}else{
+							jsyouxi("AI胜利")
+						}
+							clearInterval(IFTIE)
+						}else{
+						t=tz
+					 }
+					}else{
+						t=tz
+					}
+					}
+				}
+				
+				if(IF[t]=="X"||IF[t]=="O"){
+					if(IF[t]==IF[t+=3]){
+						if(IF[t]==IF[t+=3]){
+						
+						if(IF[t]=="X"){
+							jsyouxi("玩家胜利")
+						}else{
+							jsyouxi("AI胜利")
+						}
+							clearInterval(IFTIE)
+						}else{
+						t=tz
+					 }
+					}else{
+						t=tz
+					}
+				}
+				if(IF[t]=="X"||IF[t]=="O"){
+					if(IF[t]==IF[t+=4]){
+						if(IF[t]==IF[t+=4]){
+							
+							if(IF[t]=="X"){
+						jsyouxi("玩家胜利")
+							}else{
+								jsyouxi("AI胜利")
+							}
+							clearInterval(IFTIE)
+						}else{
+						t=tz
+					 }
+					}else{
+						t=tz
+					}
+				}
+			if(IF.indexOf(" ")==-1){
+				jsyouxi("平局")
+				clearInterval(IFTIE)
+			}
+			}
+		},2000)
+		for(var s = 0;s<qizhi.length;s++){
+			qizhi[s].onclick=function(){
+				
+				if(gzf==false){
+					kzf.innerHTML="<h1>716</h1><h4>己方</h4>持子"
+				if(this.innerHTML!="O"&&this.innerHTML!="X"){
+					this.innerHTML="X"
+				gzf=true
+				kzf.innerHTML="<h1>716</h1><h4>对方</h4>持子"
+				}
+				}
+			}
+			}
+			
+			tc.onclick=function(){
+				var remove=document.querySelector("#backgrounfd")
+				document.exitFullscreen();
+			document.body.removeChild(remove)
+				document.body.removeChild(kzf)
+				document.body.removeChild(tc)
+				document.body.removeChild(qipanbk)
+				
+			}
+			
+		}
+		function jsyouxi(a){
+			var js=document.createElement("div")
+			js.id="js"
+			js.innerHTML=a
+			js.style.zIndex=6
+			setTimeout(()=>{
+				document.body.removeChild(js)
+				var remove=document.querySelector("#backgrounfd")
+					document.exitFullscreen();
+				document.body.removeChild(remove)
+					document.body.removeChild(kzf)
+					document.body.removeChild(tc)
+					document.body.removeChild(qipanbk)
+					clearInterval(time)
+			},1500)
+			document.body.appendChild(js)
+			
+		}
 		
+		   } 
+		</script>
 	</head>
 	<body>
-	  <div id="background"></div>
-	  <div id="background1">吴良启大逃杀---黎平八中-716</div>
-	  <div id="background2" onclick="bark()">开始</div>
-	  <div id="a">吴启航</div>
-	  <div id="c">吴良鼎</div>
-	  <div id="b">你</div>
-	  <div class="ok"></div>
-	  <div class="oks"></div>
-	  <div class="jd"></div>
-	  <h1 id="jd">0</h1>
-	  <script>
-		  
-		var a = document.querySelector("#a")  
-		   var c = document.querySelector("#c")  
-	            var ok = document.querySelector(".ok")  
-	              var oks = document.querySelector(".oks")
-		            var b = document.querySelector("#b") 
-		              var jd = document.querySelector(".jd")
-		                 var jd1 = document.querySelector("#jd")
-		    var i=0
-               var at = 150
-		            var al = 0
-                          var ct=150
-		                     var cl = 700
-		                      var bt = 150
-			                    var bl = 300
-			                     var okt=500
-		  	                      var okl=500
-			                         var okw=0
-                                                   var g =0
-function bark(){
-	var back1= document.querySelector("#background")
-	 var back2 = document.querySelector("#background1") 
-	  var back3 = document.querySelector("#background2")
-	    back1.style.display="none"
-	     back2.style.display="none"
-	      back3.style.display="none"
-	 window.addEventListener("keydown",function(e){
-	 	if(e.keyCode==38){
-	 		bt-=10
-	 		b.style.top=bt+"px"
-	 	}else if(e.keyCode==40){ 		
-	 		bt+=10
-	 		b.style.top=bt+"px"
-	 	}else if(e.keyCode==39){
-	 		bl+=10
-	 	    b.style.left=bl+"px"
-	 	}else if(e.keyCode==37){
-	 		bl-=10
-	         	b.style.left=bl+"px"
-	 	}
-	 },false)
-	var time2=setInterval(()=>{
-	if(bt>at){
-		at+=1
-	}else{
-		at-=1
-	}
-	if(bl>al){
-		al+=1
-	}else{
-		al-=1
-	}
-	var s=bt-at
-	var v = bl-al		
-		a.style.top=at+"px"
-		a.style.left=al+"px"
-	},15)
-	var time3=setInterval(()=>{
-	if(bt>ct){
-		ct+=1
-	}else{
-		ct-=1
-	}
-	if(bl>cl){
-		cl+=1
-	}else{
-		cl-=1
-	}
-
-		c.style.top=ct+"px"
-		c.style.left=cl+"px"
-	},12)	
-}
-var pygame = setInterval(()=>{
-	if((bt>=okt&&bl>=okl)&&(bt<=okt+50&&bl<=okl+50)){
-	  okw+=0.02
-	    i+=0.02
-	     g=i
-           g+=""
-	        jd.style.display="block"
-               jd1.style.display="block"
-                            if(g>=10){
-	                         jd1.innerHTML=g[0]+g[1]+"%"
-                           }else{
-                                   jd1.innerHTML=g[0]+"%"         
-                                      }
-	                   oks.style.width=okw+"px"
-	  if(okw>=100){
-		  window.location.href="http://yangtongyon.github.io/jiege"
-	  }
-	}
-	if((at==bt&&al==bl)||(ct==bt&&cl==bl)){
-		document.body.innerHTML="<h1>你已失败"
-		           clearInterval(pygame)
-	}
-},1)
-	  </script>
-		  </body>
+		<div id="father">
+			<div id="son" >开始游戏</div>
+		</div>
+	</body>
 </html>
