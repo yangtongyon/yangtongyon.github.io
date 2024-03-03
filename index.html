@@ -673,11 +673,11 @@ class Gobang {
                 console.log("还没产生赢家");break;
             case 1: 
                 this.canContinue = false;
-                setTimeout(()=>{yangtao("白棋赢");},30);
+                setTimeout(()=>{yangtao("AI获胜");},30);
                 break;
             case 2:
                 this.canContinue = false;
-                setTimeout(()=>{yangtao("黑棋赢");},30);
+                setTimeout(()=>{yangtao("玩家获胜");},30);
                 break;
             default:;
         }
