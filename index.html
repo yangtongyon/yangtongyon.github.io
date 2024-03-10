@@ -161,6 +161,18 @@ body{
     box-shadow:3px 3px 3px black;
     background:linear-gradient(to bottom,#d3d0c9,#ffcfcf);
 }
+.frist{
+    width:30px;
+    height: 30px;
+    border-radius:50%;
+    border:2px solid rgb(210, 20, 20);
+    box-shadow:3px 3px 3px black;
+    background:linear-gradient(to bottom,#d3d0c9,#ffcfcf);
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #dagou{
     position: absolute;
     width:200px;
@@ -181,6 +193,46 @@ body{
     color:hotpink;
     background: #80796a;
 }
+
+#jsbeijing{
+    position:absolute;
+    top:0;
+    background:rgba(0, 0, 0,0.7);
+    left:0;
+    z-index:7;
+}
+#jssize{
+    margin-top:380px;
+    text-align: center;
+    -webkit-text-stroke: 0.5px red;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+#jsbutton{
+    position: absolute;
+    left: 660px;
+    top: 480px;
+    display: flex;
+    width: 210px;
+    height: 56px;
+    border: 0px solid #fff;
+    background: rgba(204,204,204,1);
+    -webkit-text-stroke: 0.5px red;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.3vw;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+}
+#jsbutton:active{
+    background:linear-gradient(to bottom,#FFC559,#FFAF19);
+}
+
 </style>
 <script>
     var jztimef=false
@@ -200,13 +252,44 @@ window.onload=function()
             localStorage.setItem("fwcs",fwcs)
             document.querySelector("#fwc").innerHTML=fwcs+"次"
         }
-        
+        function gameover2(a){
+            yxks=false
+                var jsbeijing=document.createElement("div")
+                var jssize=document.createElement("div")
+                var jsbutton=document.createElement("div")
+                jsbeijing.id="jsbeijing"
+                jsbutton.id="jsbutton"
+                jssize.id="jssize"
+                jsbeijing.style.width=window.innerWidth+"px"
+                jsbeijing.style.height=window.innerHeight+"px"
+                jssize.innerHTML=a
+                jsbutton.innerHTML="确定"
+                document.body.appendChild(jsbeijing)
+                jsbeijing.appendChild(jsbutton)
+                jsbeijing.appendChild(jssize)
+                jsbutton.onclick=function(){
+                   document.body.removeChild(jsbeijing)
+                   document.exitFullscreen();
+                document.body.removeChild(beijing)
+                }
+            }
+            
        document.getElementById("ksbutton").onclick= function (){
+        var yxks=true
+        var gameover=false
+        var wl=0
+        var kzf=true
         var xdqz=""
         for(var i=0;i<225;i++){
             xdqz+="0"
         }
         xdqz=xdqz.split("")
+        var quanzhong=""
+        for(var i=0;i<225;i++){
+            quanzhong+="0"
+        }
+        quanzhong=quanzhong.split("")
+
             document.documentElement.requestFullscreen();
             var beijing=document.createElement("div")
             var quxiao=document.createElement("div")
@@ -283,23 +366,40 @@ window.onload=function()
                }
             }
             dagou.onclick=function(){
-                for(var i=0;i<wlgz.length;i++){
+                if(yxks){
+                    for(var i=0;i<wlgz.length;i++){
                if(wlgz[i].getAttribute("data")=="1"){
-                gezi[i].setAttribute("data","1")
+                if(xdqz[i]=="0"){
+                    
+            
+                    gezi[i].setAttribute("data","1")
                 gezi[i].innerHTML="<div class='black'></div>"
                 wlgz[i].innerHTML=""
                 wlgz[i].setAttribute("data",0)
                 xdqz[i]="1"
+                quanzhong[i]=0
+                kzf=false
+                }
+                
                }
                
             }
-              for(var p=0;p<xdqz.length;p++){
+                
+                
+            //判断输赢
+            for(var p=0;p<xdqz.length;p++){
                 if(xdqz[p]=="1"||xdqz[p]=="2"){
                     if(xdqz[p+1*1]==xdqz[p]&&(p+1*1)%15>p%15){
                         if(xdqz[p+1*2]==xdqz[p]&&(p+1*2)%15>p%15){
                             if(xdqz[p+1*3]==xdqz[p]&&(p+1*3)%15>p%15){
                                 if(xdqz[p+1*4]==xdqz[p]&&(p+1*4)%15>p%15){
-                                     alert("game over")
+                                    
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                            gameover2("AI获胜")
+                                    }
+                                     gameover=true
                                  }
                             }
                        }
@@ -307,7 +407,12 @@ window.onload=function()
                         if(xdqz[p+15*2]==xdqz[p]){
                             if(xdqz[p+15*3]==xdqz[p]){
                                 if(xdqz[p+15*4]==xdqz[p]){
-                                    alert("game over")
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                        gameover2("AI获胜")
+                                    }
+                                    gameover=true
                                 }
                              }
                          }
@@ -315,7 +420,12 @@ window.onload=function()
                         if(xdqz[p+14*2]==xdqz[p]&&(p+14*2)%15<p%15){
                             if(xdqz[p+14*3]==xdqz[p]&&(p+14*4)%15<p%15){
                                 if(xdqz[p+14*4]==xdqz[p]&&(p+14*4)%15<p%15){
-                                    alert("game over")
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                            gameover2("AI获胜")
+                                    }
+                                    gameover=true
                              }
                            }
                          }
@@ -323,27 +433,492 @@ window.onload=function()
                         if(xdqz[p+16*2]==xdqz[p]&&(p+16*2)%15>p%15){
                             if(xdqz[p+16*3]==xdqz[p]&&(p+16*4)%15>p%15){
                                 if(xdqz[p+16*4]==xdqz[p]&&(p+16*4)%15>p%15){
-                                    alert("game over")
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                            gameover2("AI获胜")
+                                    }
+                                    gameover=true
                                 }
                             }
                         }
                     }
                 }
               }
-            }
-            window.addEventListener("keydown",function(e){
-               if(e.keyCode==87){
-                for(var i=0;i<wlgz.length;i++){
-               if(wlgz[i].getAttribute("data")=="1"){
-                gezi[i].innerHTML="<div class='black'></div>"
-                wlgz[i].innerHTML=""
-                wlgz[i].setAttribute("data",0)
-                xdqz[i]="1"
-               }
-               
+
+            if(kzf==false&&gameover==false){
+
+              //AI走棋:
+              //1.设置权重
+              for(var s=0;s<xdqz.length;s++){
+                if(xdqz[s]=="1"){
+                    if((s+1)%15>s%15&&(s+1)<225){
+                        if(parseFloat(quanzhong[s+1])<=1.5&&xdqz[s+1]=="0"){
+                            quanzhong[s+1]=parseFloat(quanzhong[s+1])+1.5+1-parseFloat(quanzhong[s+1])
+                        }else{
+                            
+                        }
+                        
+                    }
+                    if((s+14)%15<s%15&&(s+14)<225){
+                        if(parseFloat(quanzhong[s+14])<=1.5&&xdqz[s+14]=="0"){
+                            quanzhong[s+14]=parseFloat(quanzhong[s+14])+1.5+1-parseFloat(quanzhong[s+14])
+                        }else{
+                            
+                        }
+                    }
+                    if((s+15)<225){
+                        if(parseFloat(quanzhong[s+15])<=1.5&&xdqz[s+15]=="0"){
+                            quanzhong[s+15]=parseFloat(quanzhong[s+15])+1.5+1-parseFloat(quanzhong[s+15])
+                        }else{
+                            
+                        }
+                    }
+                    if((s+16)%15>s%15&&(s+16)<225){
+                        if(parseFloat(quanzhong[s+16])<=1.5&&xdqz[s+16]=="0"){
+                            quanzhong[s+16]=parseFloat(quanzhong[s+16])+1.5+1-parseFloat(quanzhong[s+16])
+                        }else{
+                            
+                        }
+                    }
+
+                    if((s-1)%15<s%15&&(s-1)>0){
+                        if(parseFloat(quanzhong[s-1])<=1.5&&xdqz[s-1]=="0"){
+                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+1.5+1-parseFloat(quanzhong[s-1])
+                        }else{
+                            
+                        }
+                    }
+                    if((s-14)%15<s%15&&(s-14)>0){
+                        if(parseFloat(quanzhong[s-14])<=1.5&&xdqz[s-14]=="0"){
+                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+1.5+1-parseFloat(quanzhong[s-14])
+                        }else{
+                            
+                        }
+                    }
+                    if((s-15)>0){
+                        if(parseFloat(quanzhong[s-15])<=1.5&&xdqz[s-15]=="0"){
+                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+1.5+1-parseFloat(quanzhong[s-15])
+                        }else{
+                          
+                        }
+                        
+                    }
+                    if((s-16)%15>s%15&&(s-16)>0){
+                        if(parseFloat(quanzhong[s-16])<=1.5&&xdqz[s-16]=="0"){
+                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+1.5+1-parseFloat(quanzhong[s-16])
+                        }else{
+                            
+                        }
+                    }
+                    
+                    
+                  if(xdqz[s+1*1]==xdqz[s]&&(s+1*1)%15>s%15){
+                    if(parseFloat(quanzhong[s-1])<=2.5&&xdqz[s-1]=="0"){
+                        quanzhong[s-1]=parseFloat(quanzhong[s-1])+2.5+1-parseFloat(quanzhong[s-1])
+                        }
+                    if((s+1*2)%15>s%15&&s+1*2<225){
+                        if(parseFloat(quanzhong[s+1*2])<=2.5&&xdqz[s+1*2]=="0"){
+                            quanzhong[s+1*2]=parseFloat(quanzhong[s+1*2])+2.5+1-parseFloat(quanzhong[s+1*2])
+                        }
+                    }
+                    if(xdqz[s+1*2]==xdqz[s]&&(s+1*2)%15>s%15){
+                        if(parseFloat(quanzhong[s-1])<=3.5&&xdqz[s-1]=="0"){
+                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+3.5+1-parseFloat(quanzhong[s-1])
+                        }
+                        if((s+1*3)%15>s%15&&s+1*3<225){
+                        if(parseFloat(quanzhong[s+1*3])<=3.5&&xdqz[s+1*3]=="0"){
+                            quanzhong[s+1*3]=parseFloat(quanzhong[s+1*3])+3.5+1-parseFloat(quanzhong[s+1*3])
+                        }
+                      }
+                      if(xdqz[s+1*3]==xdqz[s]&&(s+1*3)%15>s%15){
+                        if(parseFloat(quanzhong[s-1])<=4.5&&xdqz[s-1]=="0"){
+                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+4.5+1-parseFloat(quanzhong[s-1])
+                        }
+                        if((s+1*4)%15>s%15&&s+1*4<225){
+                        if(parseFloat(quanzhong[s+1*4])<=4.5&&xdqz[s+1*4]=="0"){
+                            quanzhong[s+1*4]=parseFloat(quanzhong[s+1*4])+4.5+1-parseFloat(quanzhong[s+1*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if(xdqz[s+1*14]==xdqz[s]&&(s+1*14)%15<s%15){
+                    if(parseFloat(quanzhong[s-14])<=2.5&&xdqz[s-14]=="0"){
+                        quanzhong[s-14]=parseFloat(quanzhong[s-14])+2.5+1-parseFloat(quanzhong[s-14])
+                        }
+                    if((s+14*2)%15<s%15&&s+14*2<225){
+                        if(parseFloat(quanzhong[s+14*2])<=2.5&&xdqz[s+14*2]=="0"){
+                            quanzhong[s+14*2]=parseFloat(quanzhong[s+14*2])+2.5+1-parseFloat(quanzhong[s+14*2])
+                        }
+                    }
+                    if(xdqz[s+14*2]==xdqz[s]&&(s+14*2)%15<s%15){
+                        if(parseFloat(quanzhong[s-14])<=3.5&&xdqz[s-14]=="0"){
+                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+3.5+1-parseFloat(quanzhong[s-14])
+                        }
+                        if((s+14*3)%15<s%15&&s+14*3<225){
+                        if(parseFloat(quanzhong[s+14*3])<=3.5&&xdqz[s+14*3]=="0"){
+                            quanzhong[s+14*3]=parseFloat(quanzhong[s+14*3])+3.5+1-parseFloat(quanzhong[s+14*3])
+                        }
+                      }
+                      if(xdqz[s+14*3]==xdqz[s]&&(s+14*3)%15<s%15){
+                        if(parseFloat(quanzhong[s-14])<=4.5&&xdqz[s-14]=="0"){
+                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+4.5+1-parseFloat(quanzhong[s-14])
+                        }
+                        if((s+14*4)%15<s%15&&s+14*4<225){
+                        if(parseFloat(quanzhong[s+14*4])<=4.5&&xdqz[s+14*4]=="0"){
+                            quanzhong[s+14*4]=parseFloat(quanzhong[s+14*4])+4.5+1-parseFloat(quanzhong[s+14*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if(xdqz[s+1*15]==xdqz[s]){
+                    if(parseFloat(quanzhong[s-15])<=2.5&&xdqz[s-15]=="0"){
+                        quanzhong[s-15]=parseFloat(quanzhong[s-15])+2.5+1-parseFloat(quanzhong[s-15])
+                        }
+                    if(s+15*2<225){
+                        if(parseFloat(quanzhong[s+15*2])<=2.5&&xdqz[s+15*2]=="0"){
+                            quanzhong[s+15*2]=parseFloat(quanzhong[s+15*2])+2.5+1-parseFloat(quanzhong[s+15*2])
+                        }
+                    }
+                    if(xdqz[s+15*2]==xdqz[s]){
+                        if(parseFloat(quanzhong[s-15])<=3.5&&xdqz[s-15]=="0"){
+                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+3.5+1-parseFloat(quanzhong[s-15])
+                        }
+                        if(s+15*3<225){
+                        if(parseFloat(quanzhong[s+15*3])<=3.5&&xdqz[s+15*3]=="0"){
+                            quanzhong[s+15*3]=parseFloat(quanzhong[s+15*3])+3.5+1-parseFloat(quanzhong[s+15*3])
+                        }
+                      }
+                      if(xdqz[s+15*3]==xdqz[s]){
+                        if(parseFloat(quanzhong[s-15])<=4.5&&xdqz[s-15]=="0"){
+                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+4.5+1-parseFloat(quanzhong[s-15])
+                        }
+                        if(s+15*4<225){
+                        if(parseFloat(quanzhong[s+15*4])<=4.5&&xdqz[s+15*4]=="0"){
+                            quanzhong[s+15*4]=parseFloat(quanzhong[s+15*4])+4.5+1-parseFloat(quanzhong[s+15*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if(xdqz[s+16*1]==xdqz[s]&&(s+16*1)%15>s%15){
+                    if(parseFloat(quanzhong[s-16])<=2.5&&xdqz[s-16]=="0"){
+                        quanzhong[s-16]=parseFloat(quanzhong[s-16])+2.5+1-parseFloat(quanzhong[s-16])
+                        }
+                    if((s+16*2)%15>s%15&&s+16*2<225){
+                        if(parseFloat(quanzhong[s+16*2])<=2.5&&xdqz[s+16*2]=="0"){
+                            quanzhong[s+16*2]=parseFloat(quanzhong[s+16*2])+2.5+1-parseFloat(quanzhong[s+16*2])
+                        }
+                    }
+                    if(xdqz[s+16*2]==xdqz[s]&&(s+16*2)%15>s%15){
+                        if(parseFloat(quanzhong[s-16])<=3.5&&xdqz[s-16]=="0"){
+                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+3.5+1-parseFloat(quanzhong[s-16])
+                        }
+                        if((s+16*3)%15>s%15&&s+16*3<225){
+                        if(parseFloat(quanzhong[s+16*3])<=3.5&&xdqz[s+16*3]=="0"){
+                            quanzhong[s+16*3]=parseFloat(quanzhong[s+16*3])+3.5+1-parseFloat(quanzhong[s+16*3])
+                        }
+                      }
+                      if(xdqz[s+16*3]==xdqz[s]&&(s+16*3)%15>s%15){
+                        if(parseFloat(quanzhong[s-16])<=4.5&&xdqz[s-16]=="0"){
+                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+4.5+1-parseFloat(quanzhong[s-16])
+                        }
+                        if((s+16*4)%15>s%15&&s+16*4<225){
+                        if(parseFloat(quanzhong[s+16*4])<=4.5&&xdqz[s+16*4]=="0"){
+                            quanzhong[s+16*4]=parseFloat(quanzhong[s+16*4])+4.5+1-parseFloat(quanzhong[s+16*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+                  
+                 
+                }else if(xdqz[s]=="2"){
+                    if((s+1)%15>s%15&&(s+1)<225){
+                        if(parseFloat(quanzhong[s+1])<=2&&xdqz[s+1]=="0"){
+                            quanzhong[s+1]=parseFloat(quanzhong[s+1])+2+1-parseFloat(quanzhong[s+1])
+                        }else{
+                            
+                        }
+                        
+                    }
+                    if((s+14)%15<s%15&&(s+14)<225){
+                        if(parseFloat(quanzhong[s+14])<=2&&xdqz[s+14]=="0"){
+                            quanzhong[s+14]=parseFloat(quanzhong[s+14])+2+1-parseFloat(quanzhong[s+14])
+                        }else{
+                            
+                        }
+                    }
+                    if((s+15)<225){
+                        if(parseFloat(quanzhong[s+15])<=2&&xdqz[s+15]=="0"){
+                            quanzhong[s+15]=parseFloat(quanzhong[s+15])+2+1-parseFloat(quanzhong[s+15])
+                        }else{
+                            
+                        }
+                    }
+                    if((s+16)%15>s%15&&(s+16)<225){
+                        if(parseFloat(quanzhong[s+16])<=2&&xdqz[s+16]=="0"){
+                            quanzhong[s+16]=parseFloat(quanzhong[s+16])+2+1-parseFloat(quanzhong[s+16])
+                        }else{
+                            
+                        }
+                    }
+
+                    if((s-1)%15<s%15&&(s-1)>0){
+                        if(parseFloat(quanzhong[s-1])<=2&&xdqz[s-1]=="0"){
+                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+2+1-parseFloat(quanzhong[s-1])
+                        }else{
+                            
+                        }
+                    }
+                    if((s-14)%15<s%15&&(s-14)>0){
+                        if(parseFloat(quanzhong[s-14])<=2&&xdqz[s-14]=="0"){
+                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+2+1-parseFloat(quanzhong[s-14])
+                        }else{
+                            
+                        }
+                    }
+                    if((s-15)>0){
+                        if(parseFloat(quanzhong[s-15])<=2&&xdqz[s-15]=="0"){
+                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+2+1-parseFloat(quanzhong[s-15])
+                        }else{
+                          
+                        }
+                        
+                    }
+                    if((s-16)%15>s%15&&(s-16)>0){
+                        if(parseFloat(quanzhong[s-16])<=2&&xdqz[s-16]=="0"){
+                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+2+1-parseFloat(quanzhong[s-16])
+                        }else{
+                            
+                        }
+                    }
+                    
+                    
+                  if(xdqz[s+1*1]==xdqz[s]&&(s+1*1)%15>s%15){
+                    if(parseFloat(quanzhong[s-1])<=3&&xdqz[s-1]=="0"){
+                        quanzhong[s-1]=parseFloat(quanzhong[s-1])+3+1-parseFloat(quanzhong[s-1])
+                        }
+                    if((s+1*2)%15>s%15&&s+1*2<225){
+                        if(parseFloat(quanzhong[s+1*2])<=3&&xdqz[s+1*2]=="0"){
+                            quanzhong[s+1*2]=parseFloat(quanzhong[s+1*2])+3+1-parseFloat(quanzhong[s+1*2])
+                        }
+                    }
+                    if(xdqz[s+1*2]==xdqz[s]&&(s+1*2)%15>s%15){
+                        if(parseFloat(quanzhong[s-1])<=4&&xdqz[s-1]=="0"){
+                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+4+1-parseFloat(quanzhong[s-1])
+                        }
+                        if((s+1*3)%15>s%15&&s+1*3<225){
+                        if(parseFloat(quanzhong[s+1*3])<=4&&xdqz[s+1*3]=="0"){
+                            quanzhong[s+1*3]=parseFloat(quanzhong[s+1*3])+4+1-parseFloat(quanzhong[s+1*3])
+                        }
+                      }
+                      if(xdqz[s+1*3]==xdqz[s]&&(s+1*3)%15>s%15){
+                        if(parseFloat(quanzhong[s-1])<=5&&xdqz[s-1]=="0"){
+                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+5+1-parseFloat(quanzhong[s-1])
+                        }
+                        if((s+1*4)%15>s%15&&s+1*4<225){
+                        if(parseFloat(quanzhong[s+1*4])<=5&&xdqz[s+1*4]=="0"){
+                            quanzhong[s+1*4]=parseFloat(quanzhong[s+1*4])+5+1-parseFloat(quanzhong[s+1*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if(xdqz[s+1*14]==xdqz[s]&&(s+1*14)%15<s%15){
+                    if(parseFloat(quanzhong[s-14])<=3&&xdqz[s-14]=="0"){
+                        quanzhong[s-14]=parseFloat(quanzhong[s-14])+3+1-parseFloat(quanzhong[s-14])
+                        }
+                    if((s+14*2)%15<s%15&&s+14*2<225){
+                        if(parseFloat(quanzhong[s+14*2])<=3&&xdqz[s+14*2]=="0"){
+                            quanzhong[s+14*2]=parseFloat(quanzhong[s+14*2])+3+1-parseFloat(quanzhong[s+14*2])
+                        }
+                    }
+                    if(xdqz[s+14*2]==xdqz[s]&&(s+14*2)%15<s%15){
+                        if(parseFloat(quanzhong[s-14])<=4&&xdqz[s-14]=="0"){
+                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+4+1-parseFloat(quanzhong[s-14])
+                        }
+                        if((s+14*3)%15<s%15&&s+14*3<225){
+                        if(parseFloat(quanzhong[s+14*3])<=4&&xdqz[s+14*3]=="0"){
+                            quanzhong[s+14*3]=parseFloat(quanzhong[s+14*3])+4+1-parseFloat(quanzhong[s+14*3])
+                        }
+                      }
+                      if(xdqz[s+14*3]==xdqz[s]&&(s+14*3)%15<s%15){
+                        if(parseFloat(quanzhong[s-14])<=5&&xdqz[s-14]=="0"){
+                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+5+1-parseFloat(quanzhong[s-14])
+                        }
+                        if((s+14*4)%15<s%15&&s+14*4<225){
+                        if(parseFloat(quanzhong[s+14*4])<=5&&xdqz[s+14*4]=="0"){
+                            quanzhong[s+14*4]=parseFloat(quanzhong[s+14*4])+5+1-parseFloat(quanzhong[s+14*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if(xdqz[s+1*15]==xdqz[s]){
+                    if(parseFloat(quanzhong[s-15])<=3&&xdqz[s-15]=="0"){
+                        quanzhong[s-15]=parseFloat(quanzhong[s-15])+3+1-parseFloat(quanzhong[s-15])
+                        }
+                    if(s+15*2<225){
+                        if(parseFloat(quanzhong[s+15*2])<=3&&xdqz[s+15*2]=="0"){
+                            quanzhong[s+15*2]=parseFloat(quanzhong[s+15*2])+3+1-parseFloat(quanzhong[s+15*2])
+                        }
+                    }
+                    if(xdqz[s+15*2]==xdqz[s]){
+                        if(parseFloat(quanzhong[s-15])<=4&&xdqz[s-15]=="0"){
+                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+4+1-parseFloat(quanzhong[s-15])
+                        }
+                        if(s+15*3<225){
+                        if(parseFloat(quanzhong[s+15*3])<=4&&xdqz[s+15*3]=="0"){
+                            quanzhong[s+15*3]=parseFloat(quanzhong[s+15*3])+4+1-parseFloat(quanzhong[s+15*3])
+                        }
+                      }
+                      if(xdqz[s+15*3]==xdqz[s]){
+                        if(parseFloat(quanzhong[s-15])<=5&&xdqz[s-15]=="0"){
+                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+5+1-parseFloat(quanzhong[s-15])
+                        }
+                        if(s+15*4<225){
+                        if(parseFloat(quanzhong[s+15*4])<=5&&xdqz[s+15*4]=="0"){
+                            quanzhong[s+15*4]=parseFloat(quanzhong[s+15*4])+5+1-parseFloat(quanzhong[s+15*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+                  if(xdqz[s+16*1]==xdqz[s]&&(s+16*1)%15>s%15){
+                    if(parseFloat(quanzhong[s-16])<=3&&xdqz[s-16]=="0"){
+                        quanzhong[s-16]=parseFloat(quanzhong[s-16])+3+1-parseFloat(quanzhong[s-16])
+                        }
+                    if((s+16*2)%15>s%15&&s+16*2<225){
+                        if(parseFloat(quanzhong[s+16*2])<=3&&xdqz[s+16*2]=="0"){
+                            quanzhong[s+16*2]=parseFloat(quanzhong[s+16*2])+3+1-parseFloat(quanzhong[s+16*2])
+                        }
+                    }
+                    if(xdqz[s+16*2]==xdqz[s]&&(s+16*2)%15>s%15){
+                        if(parseFloat(quanzhong[s-16])<=4&&xdqz[s-16]=="0"){
+                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+4+1-parseFloat(quanzhong[s-16])
+                        }
+                        if((s+16*3)%15>s%15&&s+16*3<225){
+                        if(parseFloat(quanzhong[s+16*3])<=4&&xdqz[s+16*3]=="0"){
+                            quanzhong[s+16*3]=parseFloat(quanzhong[s+16*3])+4+1-parseFloat(quanzhong[s+16*3])
+                        }
+                      }
+                      if(xdqz[s+16*3]==xdqz[s]&&(s+16*3)%15>s%15){
+                        if(parseFloat(quanzhong[s-16])<=5&&xdqz[s-16]=="0"){
+                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+5+1-parseFloat(quanzhong[s-16])
+                        }
+                        if((s+16*4)%15>s%15&&s+16*4<225){
+                        if(parseFloat(quanzhong[s+16*4])<=5&&xdqz[s+16*4]=="0"){
+                            quanzhong[s+16*4]=parseFloat(quanzhong[s+16*4])+5+1-parseFloat(quanzhong[s+16*4])
+                          }
+                        }
+                      }
+                    }
+                  }
+
+
+
+
+                }//*~*
+              }
+              //2.选择权重最大的位置
+              var best=1
+              for(var x=0;x<quanzhong.length;x++){
+                    if(parseFloat(quanzhong[x])>best){
+                        best=parseFloat(quanzhong[x])
+                    }else{
+                        best=best
+                    }
+
+              }
+             var xdwz=  quanzhong.indexOf(best)
+             if(wl>0){
+               var t= document.querySelectorAll(".frist")
+              for(var y=0;y<t.length;y++){
+                t[y].className="white"
+              }
+             }
+            for(var i=0;i<225;i++){
+                if(xdqz[xdwz]=="0"){
+                    gezi[xdwz].innerHTML="<div class='frist'></div>"
+             xdqz[xdwz]="2"
+             quanzhong[xdwz]=0
+             break
                 }
-               }
-            },false)
+            }
+            kzf=true
+            wl+=1
+             }
+             for(var p=0;p<xdqz.length;p++){
+                if(xdqz[p]=="1"||xdqz[p]=="2"){
+                    if(xdqz[p+1*1]==xdqz[p]&&(p+1*1)%15>p%15){
+                        if(xdqz[p+1*2]==xdqz[p]&&(p+1*2)%15>p%15){
+                            if(xdqz[p+1*3]==xdqz[p]&&(p+1*3)%15>p%15){
+                                if(xdqz[p+1*4]==xdqz[p]&&(p+1*4)%15>p%15){
+                                    
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                            gameover2("AI获胜")
+                                    }
+                                     gameover=true
+                                 }
+                            }
+                       }
+                    }else if(xdqz[p+15*1]==xdqz[p]){
+                        if(xdqz[p+15*2]==xdqz[p]){
+                            if(xdqz[p+15*3]==xdqz[p]){
+                                if(xdqz[p+15*4]==xdqz[p]){
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                        gameover2("AI获胜")
+                                    }
+                                    gameover=true
+                                }
+                             }
+                         }
+                    }else if(xdqz[p+14*1]==xdqz[p]&&(p+14*1)%15<p%15){
+                        if(xdqz[p+14*2]==xdqz[p]&&(p+14*2)%15<p%15){
+                            if(xdqz[p+14*3]==xdqz[p]&&(p+14*4)%15<p%15){
+                                if(xdqz[p+14*4]==xdqz[p]&&(p+14*4)%15<p%15){
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                            gameover2("AI获胜")
+                                    }
+                                    gameover=true
+                             }
+                           }
+                         }
+                    }else if(xdqz[p+16*1]==xdqz[p]&&(p+16*1)%15>p%15){
+                        if(xdqz[p+16*2]==xdqz[p]&&(p+16*2)%15>p%15){
+                            if(xdqz[p+16*3]==xdqz[p]&&(p+16*4)%15>p%15){
+                                if(xdqz[p+16*4]==xdqz[p]&&(p+16*4)%15>p%15){
+                                    if(xdqz[p]=="1"){
+                                        gameover2("玩家获胜")
+                                    }else{
+                                            gameover2("AI获胜")
+                                    }
+                                    gameover=true
+                                }
+                            }
+                        }
+                    }
+                }
+              }
+
+            }
+            }
+            
         }
         
  
@@ -352,7 +927,7 @@ window.onload=function()
 
 </script>
 <body>
-<img src="https://pic.nximg.cn/file/20190323/27759913_091454896082_2.jpg" id="background"/>
+<img src="27759913_091454896082_2.jpg" id="background"/>
 <button id="ksbutton">开始游戏</button>
 <h3 id="fw">你已访问</h3><h2 id="fwc">1</h2>
 <script>
@@ -424,5 +999,3 @@ window.onload=function()
 </script>
 </body>
 </html>
-
-
