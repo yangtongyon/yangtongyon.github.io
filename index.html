@@ -10,7 +10,7 @@
     padding: 0;
 }
 body{
-    overflow:hidden;
+   /* overflow:hidden;*/
     display:flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@ body{
     font-size: 3vw;
     -webkit-text-stroke: 1px hotpink;
     color: #f5f3e394;
-    top: 690px;
+    top: 540px;
     left: 600px;
     z-index: 3;
 }
@@ -57,7 +57,7 @@ body{
     font-size: 3vw;
     -webkit-text-stroke: 1px #fffc96;
     color: #f9000087;
-    top: 690px;
+    top: 540px;
     left: 780px;
     z-index: 3;
 }
@@ -235,6 +235,7 @@ body{
 
 </style>
 <script>
+    
     var jztimef=false
 window.onload=function()
 {
@@ -252,8 +253,10 @@ window.onload=function()
             localStorage.setItem("fwcs",fwcs)
             document.querySelector("#fwc").innerHTML=fwcs+"次"
         }
+        var yxsfjs=true
         function gameover2(a){
-            yxks=false
+            if(yxsfjs){
+                yxks=false
                 var jsbeijing=document.createElement("div")
                 var jssize=document.createElement("div")
                 var jsbutton=document.createElement("div")
@@ -271,7 +274,11 @@ window.onload=function()
                    document.body.removeChild(jsbeijing)
                    document.exitFullscreen();
                 document.body.removeChild(beijing)
+                yxsfjs=true
                 }
+            }
+
+        
             }
             
        document.getElementById("ksbutton").onclick= function (){
@@ -347,6 +354,77 @@ window.onload=function()
             }
 
             var wlgz=document.querySelectorAll(".gezi2")
+            ////----
+            var box = []; //全部落子点
+    var wins = []; //全部赢的方法 三维数组
+ 
+    for(var i = 0; i< 15 ;i++) {
+        box[i] = [];
+        wins[i] = [];
+        for(var j = 0; j < 15; j++) {
+            box[i][j] = 0;
+            wins[i][j] = [];
+        }
+    }
+ 
+    
+    var count = 0; //总共赢的数量572种
+    //横向
+    for(var a = 0; a < 15; a++) {
+        for(var b = 0; b < 11;b++) {
+            //wins[0][0][0]
+            //wins[0][1][0]
+            //wins[0][2][0]
+            for(var c = 0; c < 5;c++) {
+                wins[a][b + c][count] = true;
+            }
+            count++;
+        }
+    }
+    //纵向
+    for(var a = 0; a < 15; a++) {
+        for(var b = 0; b < 11;b++) {
+            //wins[0][0][0]
+            //wins[0][1][0]
+            //wins[0][2][0]
+            for(var c = 0; c < 5;c++) {
+                wins[b + c][a][count] = true;
+            }
+            count++;
+        }
+    }
+    
+    //斜 '\'
+    for(var a = 0; a < 11; a++) {
+        for(var b = 0; b < 11;b++) {
+            //a = 0, b = 10
+            //win[0][10]
+            //win[1][11]
+            for(var c =0; c < 5;c++) {
+                wins[a + c][b + c][count] = true;
+            }
+            count++;
+        }
+    }
+    //反斜 '/'
+    for(var a = 0; a < 11; a++) {
+        for(var b = 4; b < 15;b++) {
+            //a = 0, b = 0
+            //win[0][5]
+            //win[1][4]
+            for(var c =0; c < 5;c++) {
+                wins[a + c][b - c][count] = true;
+            }
+            count++;
+        }
+    }
+    var myWin = []; //
+    var computerWin = [];
+    for(var i = 0; i < count;i++) {
+        myWin[i] = 0;
+        computerWin[i] = 0;
+    }
+            ////----
             for(var i=0;i<wlgz.length;i++){
                wlgz[i].onclick=function(){
                 var gezi=document.querySelectorAll(".gezi")
@@ -356,12 +434,9 @@ window.onload=function()
                     wlgz[i].setAttribute("data",0)
                    
                 }
-                
-                    this.setAttribute("data",1)
+                  this.setAttribute("data",1)
                   this.innerHTML="<div class='xd'>+</div>"
-                  
-                
-                  
+
                 }
                }
             }
@@ -370,8 +445,9 @@ window.onload=function()
                     for(var i=0;i<wlgz.length;i++){
                if(wlgz[i].getAttribute("data")=="1"){
                 if(xdqz[i]=="0"){
-                    
-            
+                    var y=Math.floor(i/15)
+                    var x=i-y*15
+                    box[x][y]=1
                     gezi[i].setAttribute("data","1")
                 gezi[i].innerHTML="<div class='black'></div>"
                 wlgz[i].innerHTML=""
@@ -379,564 +455,138 @@ window.onload=function()
                 xdqz[i]="1"
                 quanzhong[i]=0
                 kzf=false
+
+            for(var k = 0; k<count; k++) {
+                if(wins[x][y][k]) {
+                    myWin[k]++;
+                    computerWin[k] = 6; //因为我方在这个点上已经落子，所以计算机不可能在这个点上赢，
+                    if(myWin[k] == 5) {
+                        gameover2("玩家胜利")
+                        yxsfjs=false
+                        //over = true;
+                    }
+                }
+            }
+   
                 }
                 
                }
                
+            }    
+            //AI下法
+            function computerAI() {
+        var myScore = []; //我方分数
+        var computerScore = []; //计算机分数
+        var max = 0; //最大分数
+        var u = 0, v = 0; //最大分数点
+        for(var i =0; i < 15; i++) {
+            myScore[i] = [];
+            computerScore[i] = [];
+            for(var j =0; j < 15; j++) {
+                myScore[i][j] = 0;
+                computerScore[i][j] = 0;
             }
-                
-                
-            //判断输赢
-            for(var p=0;p<xdqz.length;p++){
-                if(xdqz[p]=="1"||xdqz[p]=="2"){
-                    if(xdqz[p+1*1]==xdqz[p]&&(p+1*1)%15>p%15){
-                        if(xdqz[p+1*2]==xdqz[p]&&(p+1*2)%15>p%15){
-                            if(xdqz[p+1*3]==xdqz[p]&&(p+1*3)%15>p%15){
-                                if(xdqz[p+1*4]==xdqz[p]&&(p+1*4)%15>p%15){
-                                    
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                            gameover2("AI获胜")
-                                    }
-                                     gameover=true
-                                 }
+        }
+ 
+        for(var i =0; i < 15; i++) {
+            for(var j =0; j < 15; j++) {
+                if(box[i][j] == 0) { //每个空闲点上进行计算分数
+                    for(var k =0;k<count;k++) { //遍历所有可以赢的，数量
+                        if(wins[i][j][k]) { //可以赢的点进行算分
+ 
+                            if(myWin[k] == 1) {
+                                myScore[i][j] += 200;
+                            } else if(myWin[k] == 2) {
+                                myScore[i][j] += 400;
+                            } else if(myWin[k] == 3) {
+                                myScore[i][j] += 2000;
+                            } else if(myWin[k] == 4) {
+                                myScore[i][j] += 10000;
                             }
-                       }
-                    }else if(xdqz[p+15*1]==xdqz[p]){
-                        if(xdqz[p+15*2]==xdqz[p]){
-                            if(xdqz[p+15*3]==xdqz[p]){
-                                if(xdqz[p+15*4]==xdqz[p]){
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                        gameover2("AI获胜")
-                                    }
-                                    gameover=true
-                                }
-                             }
-                         }
-                    }else if(xdqz[p+14*1]==xdqz[p]&&(p+14*1)%15<p%15){
-                        if(xdqz[p+14*2]==xdqz[p]&&(p+14*2)%15<p%15){
-                            if(xdqz[p+14*3]==xdqz[p]&&(p+14*4)%15<p%15){
-                                if(xdqz[p+14*4]==xdqz[p]&&(p+14*4)%15<p%15){
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                            gameover2("AI获胜")
-                                    }
-                                    gameover=true
-                             }
-                           }
-                         }
-                    }else if(xdqz[p+16*1]==xdqz[p]&&(p+16*1)%15>p%15){
-                        if(xdqz[p+16*2]==xdqz[p]&&(p+16*2)%15>p%15){
-                            if(xdqz[p+16*3]==xdqz[p]&&(p+16*4)%15>p%15){
-                                if(xdqz[p+16*4]==xdqz[p]&&(p+16*4)%15>p%15){
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                            gameover2("AI获胜")
-                                    }
-                                    gameover=true
-                                }
+ 
+                            if(computerWin[k] == 1) {
+                                computerScore[i][j] += 220;
+                            } else if(computerWin[k] == 2) {
+                                computerScore[i][j] += 420;
+                            } else if(computerWin[k] == 3) {
+                                computerScore[i][j] += 2100;
+                            } else if(computerWin[k] == 4) {
+                                computerScore[i][j] += 20000;
                             }
                         }
                     }
-                }
-              }
-
-            if(kzf==false&&gameover==false){
-
-              //AI走棋:
-              //1.设置权重
-              for(var s=0;s<xdqz.length;s++){
-                if(xdqz[s]=="1"){
-                    if((s+1)%15>s%15&&(s+1)<225){
-                        if(parseFloat(quanzhong[s+1])<=1.5&&xdqz[s+1]=="0"){
-                            quanzhong[s+1]=parseFloat(quanzhong[s+1])+1.5+1-parseFloat(quanzhong[s+1])
-                        }else{
-                            
-                        }
-                        
-                    }
-                    if((s+14)%15<s%15&&(s+14)<225){
-                        if(parseFloat(quanzhong[s+14])<=1.5&&xdqz[s+14]=="0"){
-                            quanzhong[s+14]=parseFloat(quanzhong[s+14])+1.5+1-parseFloat(quanzhong[s+14])
-                        }else{
-                            
+ 
+                    //得出最大分数的点，并赋给u,v
+                    if(myScore[i][j] > max) {
+                        max = myScore[i][j];
+                        u = i;
+                        v = j;
+                    } else if(myScore[i][j] == max) {
+                        if(computerScore[i][j] > computerScore[u][v]) {
+                            u = i;
+                            v = j;
                         }
                     }
-                    if((s+15)<225){
-                        if(parseFloat(quanzhong[s+15])<=1.5&&xdqz[s+15]=="0"){
-                            quanzhong[s+15]=parseFloat(quanzhong[s+15])+1.5+1-parseFloat(quanzhong[s+15])
-                        }else{
-                            
+ 
+                    if(computerScore[i][j] > max) {
+                        max = computerScore[i][j];
+                        u = i;
+                        v = j;
+                    } else if(computerScore[i][j] == max) {
+                        if(myScore[i][j] > myScore[u][v]) {
+                            u = i;
+                            v = j;
                         }
                     }
-                    if((s+16)%15>s%15&&(s+16)<225){
-                        if(parseFloat(quanzhong[s+16])<=1.5&&xdqz[s+16]=="0"){
-                            quanzhong[s+16]=parseFloat(quanzhong[s+16])+1.5+1-parseFloat(quanzhong[s+16])
-                        }else{
-                            
-                        }
-                    }
-
-                    if((s-1)%15<s%15&&(s-1)>0){
-                        if(parseFloat(quanzhong[s-1])<=1.5&&xdqz[s-1]=="0"){
-                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+1.5+1-parseFloat(quanzhong[s-1])
-                        }else{
-                            
-                        }
-                    }
-                    if((s-14)%15<s%15&&(s-14)>0){
-                        if(parseFloat(quanzhong[s-14])<=1.5&&xdqz[s-14]=="0"){
-                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+1.5+1-parseFloat(quanzhong[s-14])
-                        }else{
-                            
-                        }
-                    }
-                    if((s-15)>0){
-                        if(parseFloat(quanzhong[s-15])<=1.5&&xdqz[s-15]=="0"){
-                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+1.5+1-parseFloat(quanzhong[s-15])
-                        }else{
-                          
-                        }
-                        
-                    }
-                    if((s-16)%15>s%15&&(s-16)>0){
-                        if(parseFloat(quanzhong[s-16])<=1.5&&xdqz[s-16]=="0"){
-                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+1.5+1-parseFloat(quanzhong[s-16])
-                        }else{
-                            
-                        }
-                    }
-                    
-                    
-                  if(xdqz[s+1*1]==xdqz[s]&&(s+1*1)%15>s%15){
-                    if(parseFloat(quanzhong[s-1])<=2.5&&xdqz[s-1]=="0"){
-                        quanzhong[s-1]=parseFloat(quanzhong[s-1])+2.5+1-parseFloat(quanzhong[s-1])
-                        }
-                    if((s+1*2)%15>s%15&&s+1*2<225){
-                        if(parseFloat(quanzhong[s+1*2])<=2.5&&xdqz[s+1*2]=="0"){
-                            quanzhong[s+1*2]=parseFloat(quanzhong[s+1*2])+2.5+1-parseFloat(quanzhong[s+1*2])
-                        }
-                    }
-                    if(xdqz[s+1*2]==xdqz[s]&&(s+1*2)%15>s%15){
-                        if(parseFloat(quanzhong[s-1])<=3.5&&xdqz[s-1]=="0"){
-                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+3.5+1-parseFloat(quanzhong[s-1])
-                        }
-                        if((s+1*3)%15>s%15&&s+1*3<225){
-                        if(parseFloat(quanzhong[s+1*3])<=3.5&&xdqz[s+1*3]=="0"){
-                            quanzhong[s+1*3]=parseFloat(quanzhong[s+1*3])+3.5+1-parseFloat(quanzhong[s+1*3])
-                        }
-                      }
-                      if(xdqz[s+1*3]==xdqz[s]&&(s+1*3)%15>s%15){
-                        if(parseFloat(quanzhong[s-1])<=4.5&&xdqz[s-1]=="0"){
-                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+4.5+1-parseFloat(quanzhong[s-1])
-                        }
-                        if((s+1*4)%15>s%15&&s+1*4<225){
-                        if(parseFloat(quanzhong[s+1*4])<=4.5&&xdqz[s+1*4]=="0"){
-                            quanzhong[s+1*4]=parseFloat(quanzhong[s+1*4])+4.5+1-parseFloat(quanzhong[s+1*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  if(xdqz[s+1*14]==xdqz[s]&&(s+1*14)%15<s%15){
-                    if(parseFloat(quanzhong[s-14])<=2.5&&xdqz[s-14]=="0"){
-                        quanzhong[s-14]=parseFloat(quanzhong[s-14])+2.5+1-parseFloat(quanzhong[s-14])
-                        }
-                    if((s+14*2)%15<s%15&&s+14*2<225){
-                        if(parseFloat(quanzhong[s+14*2])<=2.5&&xdqz[s+14*2]=="0"){
-                            quanzhong[s+14*2]=parseFloat(quanzhong[s+14*2])+2.5+1-parseFloat(quanzhong[s+14*2])
-                        }
-                    }
-                    if(xdqz[s+14*2]==xdqz[s]&&(s+14*2)%15<s%15){
-                        if(parseFloat(quanzhong[s-14])<=3.5&&xdqz[s-14]=="0"){
-                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+3.5+1-parseFloat(quanzhong[s-14])
-                        }
-                        if((s+14*3)%15<s%15&&s+14*3<225){
-                        if(parseFloat(quanzhong[s+14*3])<=3.5&&xdqz[s+14*3]=="0"){
-                            quanzhong[s+14*3]=parseFloat(quanzhong[s+14*3])+3.5+1-parseFloat(quanzhong[s+14*3])
-                        }
-                      }
-                      if(xdqz[s+14*3]==xdqz[s]&&(s+14*3)%15<s%15){
-                        if(parseFloat(quanzhong[s-14])<=4.5&&xdqz[s-14]=="0"){
-                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+4.5+1-parseFloat(quanzhong[s-14])
-                        }
-                        if((s+14*4)%15<s%15&&s+14*4<225){
-                        if(parseFloat(quanzhong[s+14*4])<=4.5&&xdqz[s+14*4]=="0"){
-                            quanzhong[s+14*4]=parseFloat(quanzhong[s+14*4])+4.5+1-parseFloat(quanzhong[s+14*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  if(xdqz[s+1*15]==xdqz[s]){
-                    if(parseFloat(quanzhong[s-15])<=2.5&&xdqz[s-15]=="0"){
-                        quanzhong[s-15]=parseFloat(quanzhong[s-15])+2.5+1-parseFloat(quanzhong[s-15])
-                        }
-                    if(s+15*2<225){
-                        if(parseFloat(quanzhong[s+15*2])<=2.5&&xdqz[s+15*2]=="0"){
-                            quanzhong[s+15*2]=parseFloat(quanzhong[s+15*2])+2.5+1-parseFloat(quanzhong[s+15*2])
-                        }
-                    }
-                    if(xdqz[s+15*2]==xdqz[s]){
-                        if(parseFloat(quanzhong[s-15])<=3.5&&xdqz[s-15]=="0"){
-                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+3.5+1-parseFloat(quanzhong[s-15])
-                        }
-                        if(s+15*3<225){
-                        if(parseFloat(quanzhong[s+15*3])<=3.5&&xdqz[s+15*3]=="0"){
-                            quanzhong[s+15*3]=parseFloat(quanzhong[s+15*3])+3.5+1-parseFloat(quanzhong[s+15*3])
-                        }
-                      }
-                      if(xdqz[s+15*3]==xdqz[s]){
-                        if(parseFloat(quanzhong[s-15])<=4.5&&xdqz[s-15]=="0"){
-                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+4.5+1-parseFloat(quanzhong[s-15])
-                        }
-                        if(s+15*4<225){
-                        if(parseFloat(quanzhong[s+15*4])<=4.5&&xdqz[s+15*4]=="0"){
-                            quanzhong[s+15*4]=parseFloat(quanzhong[s+15*4])+4.5+1-parseFloat(quanzhong[s+15*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  if(xdqz[s+16*1]==xdqz[s]&&(s+16*1)%15>s%15){
-                    if(parseFloat(quanzhong[s-16])<=2.5&&xdqz[s-16]=="0"){
-                        quanzhong[s-16]=parseFloat(quanzhong[s-16])+2.5+1-parseFloat(quanzhong[s-16])
-                        }
-                    if((s+16*2)%15>s%15&&s+16*2<225){
-                        if(parseFloat(quanzhong[s+16*2])<=2.5&&xdqz[s+16*2]=="0"){
-                            quanzhong[s+16*2]=parseFloat(quanzhong[s+16*2])+2.5+1-parseFloat(quanzhong[s+16*2])
-                        }
-                    }
-                    if(xdqz[s+16*2]==xdqz[s]&&(s+16*2)%15>s%15){
-                        if(parseFloat(quanzhong[s-16])<=3.5&&xdqz[s-16]=="0"){
-                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+3.5+1-parseFloat(quanzhong[s-16])
-                        }
-                        if((s+16*3)%15>s%15&&s+16*3<225){
-                        if(parseFloat(quanzhong[s+16*3])<=3.5&&xdqz[s+16*3]=="0"){
-                            quanzhong[s+16*3]=parseFloat(quanzhong[s+16*3])+3.5+1-parseFloat(quanzhong[s+16*3])
-                        }
-                      }
-                      if(xdqz[s+16*3]==xdqz[s]&&(s+16*3)%15>s%15){
-                        if(parseFloat(quanzhong[s-16])<=4.5&&xdqz[s-16]=="0"){
-                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+4.5+1-parseFloat(quanzhong[s-16])
-                        }
-                        if((s+16*4)%15>s%15&&s+16*4<225){
-                        if(parseFloat(quanzhong[s+16*4])<=4.5&&xdqz[s+16*4]=="0"){
-                            quanzhong[s+16*4]=parseFloat(quanzhong[s+16*4])+4.5+1-parseFloat(quanzhong[s+16*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-                  
-                 
-                }else if(xdqz[s]=="2"){
-                    if((s+1)%15>s%15&&(s+1)<225){
-                        if(parseFloat(quanzhong[s+1])<=2&&xdqz[s+1]=="0"){
-                            quanzhong[s+1]=parseFloat(quanzhong[s+1])+2+1-parseFloat(quanzhong[s+1])
-                        }else{
-                            
-                        }
-                        
-                    }
-                    if((s+14)%15<s%15&&(s+14)<225){
-                        if(parseFloat(quanzhong[s+14])<=2&&xdqz[s+14]=="0"){
-                            quanzhong[s+14]=parseFloat(quanzhong[s+14])+2+1-parseFloat(quanzhong[s+14])
-                        }else{
-                            
-                        }
-                    }
-                    if((s+15)<225){
-                        if(parseFloat(quanzhong[s+15])<=2&&xdqz[s+15]=="0"){
-                            quanzhong[s+15]=parseFloat(quanzhong[s+15])+2+1-parseFloat(quanzhong[s+15])
-                        }else{
-                            
-                        }
-                    }
-                    if((s+16)%15>s%15&&(s+16)<225){
-                        if(parseFloat(quanzhong[s+16])<=2&&xdqz[s+16]=="0"){
-                            quanzhong[s+16]=parseFloat(quanzhong[s+16])+2+1-parseFloat(quanzhong[s+16])
-                        }else{
-                            
-                        }
-                    }
-
-                    if((s-1)%15<s%15&&(s-1)>0){
-                        if(parseFloat(quanzhong[s-1])<=2&&xdqz[s-1]=="0"){
-                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+2+1-parseFloat(quanzhong[s-1])
-                        }else{
-                            
-                        }
-                    }
-                    if((s-14)%15<s%15&&(s-14)>0){
-                        if(parseFloat(quanzhong[s-14])<=2&&xdqz[s-14]=="0"){
-                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+2+1-parseFloat(quanzhong[s-14])
-                        }else{
-                            
-                        }
-                    }
-                    if((s-15)>0){
-                        if(parseFloat(quanzhong[s-15])<=2&&xdqz[s-15]=="0"){
-                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+2+1-parseFloat(quanzhong[s-15])
-                        }else{
-                          
-                        }
-                        
-                    }
-                    if((s-16)%15>s%15&&(s-16)>0){
-                        if(parseFloat(quanzhong[s-16])<=2&&xdqz[s-16]=="0"){
-                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+2+1-parseFloat(quanzhong[s-16])
-                        }else{
-                            
-                        }
-                    }
-                    
-                    
-                  if(xdqz[s+1*1]==xdqz[s]&&(s+1*1)%15>s%15){
-                    if(parseFloat(quanzhong[s-1])<=3&&xdqz[s-1]=="0"){
-                        quanzhong[s-1]=parseFloat(quanzhong[s-1])+3+1-parseFloat(quanzhong[s-1])
-                        }
-                    if((s+1*2)%15>s%15&&s+1*2<225){
-                        if(parseFloat(quanzhong[s+1*2])<=3&&xdqz[s+1*2]=="0"){
-                            quanzhong[s+1*2]=parseFloat(quanzhong[s+1*2])+3+1-parseFloat(quanzhong[s+1*2])
-                        }
-                    }
-                    if(xdqz[s+1*2]==xdqz[s]&&(s+1*2)%15>s%15){
-                        if(parseFloat(quanzhong[s-1])<=4&&xdqz[s-1]=="0"){
-                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+4+1-parseFloat(quanzhong[s-1])
-                        }
-                        if((s+1*3)%15>s%15&&s+1*3<225){
-                        if(parseFloat(quanzhong[s+1*3])<=4&&xdqz[s+1*3]=="0"){
-                            quanzhong[s+1*3]=parseFloat(quanzhong[s+1*3])+4+1-parseFloat(quanzhong[s+1*3])
-                        }
-                      }
-                      if(xdqz[s+1*3]==xdqz[s]&&(s+1*3)%15>s%15){
-                        if(parseFloat(quanzhong[s-1])<=5&&xdqz[s-1]=="0"){
-                            quanzhong[s-1]=parseFloat(quanzhong[s-1])+5+1-parseFloat(quanzhong[s-1])
-                        }
-                        if((s+1*4)%15>s%15&&s+1*4<225){
-                        if(parseFloat(quanzhong[s+1*4])<=5&&xdqz[s+1*4]=="0"){
-                            quanzhong[s+1*4]=parseFloat(quanzhong[s+1*4])+5+1-parseFloat(quanzhong[s+1*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  if(xdqz[s+1*14]==xdqz[s]&&(s+1*14)%15<s%15){
-                    if(parseFloat(quanzhong[s-14])<=3&&xdqz[s-14]=="0"){
-                        quanzhong[s-14]=parseFloat(quanzhong[s-14])+3+1-parseFloat(quanzhong[s-14])
-                        }
-                    if((s+14*2)%15<s%15&&s+14*2<225){
-                        if(parseFloat(quanzhong[s+14*2])<=3&&xdqz[s+14*2]=="0"){
-                            quanzhong[s+14*2]=parseFloat(quanzhong[s+14*2])+3+1-parseFloat(quanzhong[s+14*2])
-                        }
-                    }
-                    if(xdqz[s+14*2]==xdqz[s]&&(s+14*2)%15<s%15){
-                        if(parseFloat(quanzhong[s-14])<=4&&xdqz[s-14]=="0"){
-                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+4+1-parseFloat(quanzhong[s-14])
-                        }
-                        if((s+14*3)%15<s%15&&s+14*3<225){
-                        if(parseFloat(quanzhong[s+14*3])<=4&&xdqz[s+14*3]=="0"){
-                            quanzhong[s+14*3]=parseFloat(quanzhong[s+14*3])+4+1-parseFloat(quanzhong[s+14*3])
-                        }
-                      }
-                      if(xdqz[s+14*3]==xdqz[s]&&(s+14*3)%15<s%15){
-                        if(parseFloat(quanzhong[s-14])<=5&&xdqz[s-14]=="0"){
-                            quanzhong[s-14]=parseFloat(quanzhong[s-14])+5+1-parseFloat(quanzhong[s-14])
-                        }
-                        if((s+14*4)%15<s%15&&s+14*4<225){
-                        if(parseFloat(quanzhong[s+14*4])<=5&&xdqz[s+14*4]=="0"){
-                            quanzhong[s+14*4]=parseFloat(quanzhong[s+14*4])+5+1-parseFloat(quanzhong[s+14*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  if(xdqz[s+1*15]==xdqz[s]){
-                    if(parseFloat(quanzhong[s-15])<=3&&xdqz[s-15]=="0"){
-                        quanzhong[s-15]=parseFloat(quanzhong[s-15])+3+1-parseFloat(quanzhong[s-15])
-                        }
-                    if(s+15*2<225){
-                        if(parseFloat(quanzhong[s+15*2])<=3&&xdqz[s+15*2]=="0"){
-                            quanzhong[s+15*2]=parseFloat(quanzhong[s+15*2])+3+1-parseFloat(quanzhong[s+15*2])
-                        }
-                    }
-                    if(xdqz[s+15*2]==xdqz[s]){
-                        if(parseFloat(quanzhong[s-15])<=4&&xdqz[s-15]=="0"){
-                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+4+1-parseFloat(quanzhong[s-15])
-                        }
-                        if(s+15*3<225){
-                        if(parseFloat(quanzhong[s+15*3])<=4&&xdqz[s+15*3]=="0"){
-                            quanzhong[s+15*3]=parseFloat(quanzhong[s+15*3])+4+1-parseFloat(quanzhong[s+15*3])
-                        }
-                      }
-                      if(xdqz[s+15*3]==xdqz[s]){
-                        if(parseFloat(quanzhong[s-15])<=5&&xdqz[s-15]=="0"){
-                            quanzhong[s-15]=parseFloat(quanzhong[s-15])+5+1-parseFloat(quanzhong[s-15])
-                        }
-                        if(s+15*4<225){
-                        if(parseFloat(quanzhong[s+15*4])<=5&&xdqz[s+15*4]=="0"){
-                            quanzhong[s+15*4]=parseFloat(quanzhong[s+15*4])+5+1-parseFloat(quanzhong[s+15*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-                  if(xdqz[s+16*1]==xdqz[s]&&(s+16*1)%15>s%15){
-                    if(parseFloat(quanzhong[s-16])<=3&&xdqz[s-16]=="0"){
-                        quanzhong[s-16]=parseFloat(quanzhong[s-16])+3+1-parseFloat(quanzhong[s-16])
-                        }
-                    if((s+16*2)%15>s%15&&s+16*2<225){
-                        if(parseFloat(quanzhong[s+16*2])<=3&&xdqz[s+16*2]=="0"){
-                            quanzhong[s+16*2]=parseFloat(quanzhong[s+16*2])+3+1-parseFloat(quanzhong[s+16*2])
-                        }
-                    }
-                    if(xdqz[s+16*2]==xdqz[s]&&(s+16*2)%15>s%15){
-                        if(parseFloat(quanzhong[s-16])<=4&&xdqz[s-16]=="0"){
-                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+4+1-parseFloat(quanzhong[s-16])
-                        }
-                        if((s+16*3)%15>s%15&&s+16*3<225){
-                        if(parseFloat(quanzhong[s+16*3])<=4&&xdqz[s+16*3]=="0"){
-                            quanzhong[s+16*3]=parseFloat(quanzhong[s+16*3])+4+1-parseFloat(quanzhong[s+16*3])
-                        }
-                      }
-                      if(xdqz[s+16*3]==xdqz[s]&&(s+16*3)%15>s%15){
-                        if(parseFloat(quanzhong[s-16])<=5&&xdqz[s-16]=="0"){
-                            quanzhong[s-16]=parseFloat(quanzhong[s-16])+5+1-parseFloat(quanzhong[s-16])
-                        }
-                        if((s+16*4)%15>s%15&&s+16*4<225){
-                        if(parseFloat(quanzhong[s+16*4])<=5&&xdqz[s+16*4]=="0"){
-                            quanzhong[s+16*4]=parseFloat(quanzhong[s+16*4])+5+1-parseFloat(quanzhong[s+16*4])
-                          }
-                        }
-                      }
-                    }
-                  }
-
-
-
-
-                }//*~*
-              }
-              //2.选择权重最大的位置
-              var best=1
-              for(var x=0;x<quanzhong.length;x++){
-                    if(parseFloat(quanzhong[x])>best){
-                        best=parseFloat(quanzhong[x])
-                    }else{
-                        best=best
-                    }
-
-              }
-             var xdwz=  quanzhong.indexOf(best)
-             if(wl>0){
+ 
+                }//所有空闲点上进行计算分数
+            }
+        }
+        var zc=v*15+u
+        box[u][v]=2
+////////////////////
+          if(wl>0){
                var t= document.querySelectorAll(".frist")
               for(var y=0;y<t.length;y++){
                 t[y].className="white"
               }
              }
             for(var i=0;i<225;i++){
-                if(xdqz[xdwz]=="0"){
-                    gezi[xdwz].innerHTML="<div class='frist'></div>"
-             xdqz[xdwz]="2"
-             quanzhong[xdwz]=0
+                
+                    gezi[zc].innerHTML="<div class='frist'></div>"
+                     
              break
-                }
+                
             }
             kzf=true
             wl+=1
-             }
-             for(var p=0;p<xdqz.length;p++){
-                if(xdqz[p]=="1"||xdqz[p]=="2"){
-                    if(xdqz[p+1*1]==xdqz[p]&&(p+1*1)%15>p%15){
-                        if(xdqz[p+1*2]==xdqz[p]&&(p+1*2)%15>p%15){
-                            if(xdqz[p+1*3]==xdqz[p]&&(p+1*3)%15>p%15){
-                                if(xdqz[p+1*4]==xdqz[p]&&(p+1*4)%15>p%15){
-                                    
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                            gameover2("AI获胜")
-                                    }
-                                     gameover=true
-                                 }
-                            }
-                       }
-                    }else if(xdqz[p+15*1]==xdqz[p]){
-                        if(xdqz[p+15*2]==xdqz[p]){
-                            if(xdqz[p+15*3]==xdqz[p]){
-                                if(xdqz[p+15*4]==xdqz[p]){
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                        gameover2("AI获胜")
-                                    }
-                                    gameover=true
-                                }
-                             }
-                         }
-                    }else if(xdqz[p+14*1]==xdqz[p]&&(p+14*1)%15<p%15){
-                        if(xdqz[p+14*2]==xdqz[p]&&(p+14*2)%15<p%15){
-                            if(xdqz[p+14*3]==xdqz[p]&&(p+14*4)%15<p%15){
-                                if(xdqz[p+14*4]==xdqz[p]&&(p+14*4)%15<p%15){
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                            gameover2("AI获胜")
-                                    }
-                                    gameover=true
-                             }
-                           }
-                         }
-                    }else if(xdqz[p+16*1]==xdqz[p]&&(p+16*1)%15>p%15){
-                        if(xdqz[p+16*2]==xdqz[p]&&(p+16*2)%15>p%15){
-                            if(xdqz[p+16*3]==xdqz[p]&&(p+16*4)%15>p%15){
-                                if(xdqz[p+16*4]==xdqz[p]&&(p+16*4)%15>p%15){
-                                    if(xdqz[p]=="1"){
-                                        gameover2("玩家获胜")
-                                    }else{
-                                            gameover2("AI获胜")
-                                    }
-                                    gameover=true
-                                }
-                            }
-                        }
-                    }
-                }
-              }
-
-            }
-            }
-            
-        }
+///////////////////
+        
         
  
+        for(var k = 0; k<count; k++) {
+            if(wins[u][v][k]) {
+                computerWin[k]++;
+                myWin[k] = 6;
+                if(computerWin[k] == 5) {
+                    gameover2('AI赢了')
+                    yxsfjs=false
+                }
+            }
+        }
+               }
+               computerAI()
+            }
+            }
+           
+        }
 }
-
-
 </script>
 <body>
-<img src="https://pic.nximg.cn/file/20190323/27759913_091454896082_2.jpg" id="background"/>
+<img src="27759913_091454896082_2.jpg" id="background"/>
 <button id="ksbutton">开始游戏</button>
 <h3 id="fw">你已访问</h3><h2 id="fwc">1</h2>
 <script>
-
-
-
-
-
-
     jzd=0
     var jz=document.createElement("div")
     var jz2q=document.createElement("div")
@@ -955,7 +605,6 @@ window.onload=function()
     jz.style.justifyContent="center"
     jz.style.alignItems="center"
     jz.style.zIndex=3
-     
     jz2q.style.position="absolute"
     jz2q.style.width=40+"px"
     jz2q.style.height=40+"px"
@@ -963,19 +612,16 @@ window.onload=function()
     jz2q.style.left=window.innerWidth/2+75+"px"
     jz2q.style.border="3px solid black"
     jz2q.style.zIndex=3
-
     jz2.style.position="absolute"
     jz2.style.width=35+"px"
     jz2.style.height=35+"px"
     jz2.style.border="5px solid white"
     jz2.style.borderRadius="50%"
-
     document.body.appendChild(jz)
     document.body.appendChild(jz2q)
     jz2q.appendChild(jz2)
     var jz3t=parseInt(getComputedStyle(jz2).top)+20
     var jz3l=parseInt(getComputedStyle(jz2).left)+20
-
     jz3.style.position="absolute"
     jz3.style.width=30+"px"
     jz3.style.height=10+"px"
@@ -991,11 +637,8 @@ window.onload=function()
             cancelAnimationFrame(jztime)
         }else{
             requestAnimationFrame(jztimer)
-        }
-        
-           
+        }  
     })
-
 </script>
 </body>
 </html>
