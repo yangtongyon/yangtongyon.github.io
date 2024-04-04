@@ -1,644 +1,203 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 <meta charset="utf-8"/>
-<title>五子棋---------716</title>
-<link rel="icon" href="mw.png"/>
+<title>海战棋2----716</title>
+<link rel="icon" href="https://tse4-mm.cn.bing.net/th/id/OIP-C.9ui4ef2eyEe8seWMJX0YVAHaHa?rs=1&pid=ImgDetMain"/>
 <style>
-*{
-    margin: 0;
-    padding: 0;
-}
-body{
-   /* overflow:hidden;*/
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-}
-#background{
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    #banquan{
+     
+    width: 300px;
+    font-size: 4vw;
+    color: white;
     position: absolute;
-    top:0;
-    width: 1500px;
-    height: 850px;
-}
-#ksbutton{
-    display: flex;
-    width: 270px;
-    height: 70px;
-    border-radius: 16px;
-    border: 0px solid #fff;
-    background: rgba(204,204,204,1);
-    -webkit-text-stroke: 0.5px red;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.3vw;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top:400px;
-    z-index:2;
-    font-weight: 600;
     
-}
-#ksbutton:active{
-    background:linear-gradient(to bottom,#FFC559,#FFAF19);
-}
-#fw{
-    position: absolute;
-    font-size: 3vw;
-    -webkit-text-stroke: 1px hotpink;
-    color: #f5f3e394;
-    top: 540px;
-    left: 600px;
-    z-index: 3;
-}
-#fwc{
-    position: absolute;
-    font-size: 3vw;
-    -webkit-text-stroke: 1px #fffc96;
-    color: #f9000087;
-    top: 540px;
-    left: 780px;
-    z-index: 3;
-}
-#beijing{
-    position: absolute;
-    top:0;
-    z-index:4;
-    background:rgb(223,224,255);
-}
-#quxiao{
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background: url(https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/close.a35a1809.svg);
-    cursor: pointer;
-    background-size: 100% 100%;
-}
-#qipanbk{
+    top:-100px;
+    left: -200px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
     
-    position: absolute;
-    width: 630px;
-    height: 630px;
-    border:0px solid black;
-    top:110px;
-    left: 450px;
-    z-index:5;
-    
+    animation: ban 6s ;
+    animation-delay:1s;
+    }
+    body{
+        background:rgba(0, 0, 0, 0.999);
+    }
+    #nc{
+        position: absolute;
+    width: 330px;
+    top: 215px;
+    left: 390px;
+    filter:brightness(900%);
+    animation: nc 3s ;
+    background:rgba(0, 0, 0, 0.999);
+    z-index:1;
+    }
+    @keyframes nc{
+        0% 
+            {
+                -webkit-filter: brightness(0%);
+                filter: brightness(0%);
+            }
+            40% 
+            {
+                -webkit-filter: brightness(20%);
+                filter: brightness(20%);
+            }
+            50% 
+            {
+                -webkit-filter: brightness(30%);
+                filter: brightness(100%);
+            }
+            60% 
+            {
+                -webkit-filter: brightness(40%);
+                filter: brightness(200%);
+            }
+            62% 
+            {
+                -webkit-filter: brightness(20%);
+                filter: brightness(20%);
+            }
+            96% 
+            {
+                -webkit-filter: brightness(20%);
+                filter: brightness(10%);
+            }
+            96% 
+            {
+                -webkit-filter: brightness(400%);
+                filter: brightness(100%);
+            }
+            100%{
+                -webkit-filter: brightness(500%);
+                filter: brightness(250%);
+            }
+    }
+    @keyframes  ban{
+        0%{
+            position: absolute;
+            top: 335px;
+           left: 390px;
+           -webkit-filter: brightness(0%);
+                filter: brightness(0%);
+                display: block;
+        }
+        40%{
+            -webkit-filter: brightness(0%);
+                filter: brightness(20%);
+                display: block;
+        }
+        60%{
+            -webkit-filter: brightness(25%);
+                filter: brightness(100%);
+                display: block;
+        }
+        80%{
+            -webkit-filter: brightness(500%);
+                filter: brightness(200%);
+                display: block;
+        }
+        85%{
+            position: absolute;
+            -webkit-filter: brightness(500%);
+                filter: brightness(900%);
+            top: 335px;
+            left: 720px;
+            display: block;
+        }
+        90%{
+            position: absolute;
+            -webkit-filter: brightness(500%);
+                filter: brightness(900%);
+            top: 335px;
+            left: 720px;
+            display: block;
+        }
+        100%{
+            position: absolute;
+            -webkit-filter: brightness(500%);
+                filter: brightness(900%);
+            top: 335px;
+            left: 720px;
+            display: block;
+        }
+    }
+    #sc8{
+        position: absolute;
+        color: white;
+        top: 435px;
+            left: 760px;
+            font-size:1.7vw;
+            
+           
+    }
+@keyframes sc8{
+    0%{
+        color: black;
+        -webkit-filter: brightness(0%);
+                filter: brightness(0%);
+    }
+    40%{
+        -webkit-filter: brightness(20%);
+                filter: brightness(20%);
+    }
+    100%{
+        -webkit-filter: brightness(500%);
+                filter: brightness(600%);
+    }
 }
-.gezi{
-    float: left;
-    width: 40px;
-    height: 40px;
-    border:1px solid rgba(204,204,204,0); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.gezi2{
-    float: left;
-    width: 40px;
-    height: 40px;
-    border:1px solid rgba(223,224,255,0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.gezizs{
-    float: left;
-    width: 40px;
-    height: 40px;
-    border:1px solid black; 
-}
-#qipanbk2{
-    
-    position: absolute;
-    width: 610px;
-    height: 610px;
-    border:0px solid black;
-    top:130px;
-    left: 470px;
-    
-}
-#center{
-    width: 10px;
-    height: 10px;
-    border-radius:50%;
-    background:black;
-}
-#wlqipanbk{
-    position: absolute;
-    width: 630px;
-    height: 630px;
-    border:1px solid rgba(223,224,255,0);
-    top:110px;
-    left: 450px;
-    z-index:6;
-}
-.xd{
-    width:30px;
-    height: 30px;
-    border-radius:50%;
-    border:3px solid red;
-    
-    
-    color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.black{
-    width:30px;
-    height: 30px;
-    border-radius:50%;
-    box-shadow:3px 3px 3px black;
-    background:linear-gradient(to bottom,#80796a,#000000);
-}
-.white{
-    width:30px;
-    height: 30px;
-    border-radius:50%;
-    box-shadow:3px 3px 3px black;
-    background:linear-gradient(to bottom,#d3d0c9,#ffcfcf);
-}
-.frist{
-    width:30px;
-    height: 30px;
-    border-radius:50%;
-    border:2px solid rgb(210, 20, 20);
-    box-shadow:3px 3px 3px black;
-    background:linear-gradient(to bottom,#d3d0c9,#ffcfcf);
-    color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#dagou{
-    position: absolute;
-    width:200px;
-    height:60px;
-    border:2px solid hotpink;
-    border-radius:5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top:740px;
-    left:680px;
-    z-index:4;
-    font-size: 3vw;
-    -webkit-text-stroke: 1px hotpink;
-    color: #f5f3e394;
-}
-#dagou:active{
-    color:hotpink;
-    background: #80796a;
-}
-
-#jsbeijing{
-    position:absolute;
-    top:0;
-    background:rgba(0, 0, 0,0.7);
-    left:0;
-    z-index:7;
-}
-#jssize{
-    margin-top:380px;
-    text-align: center;
-    -webkit-text-stroke: 0.5px red;
-    justify-content: center;
-    align-items: center;
-    font-size: 3vw;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-}
-#jsbutton{
-    position: absolute;
-    left: 660px;
-    top: 480px;
-    display: flex;
-    width: 210px;
-    height: 56px;
-    border: 0px solid #fff;
-    background: rgba(204,204,204,1);
-    -webkit-text-stroke: 0.5px red;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.3vw;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 600;
-}
-#jsbutton:active{
-    background:linear-gradient(to bottom,#FFC559,#FFAF19);
-}
-
+ 
+    #sc8 span
+        {
+            height:20px;
+        }
+        #sc8 span:first-child{
+            animation:sc8 3s;
+        }
+        #sc8 span:nth-child(2){
+            animation:sc8 4s;
+        }
+        #sc8 span:nth-child(3){
+            animation:sc8 5s;
+        }
+        #sc8 span:nth-child(4){
+            animation:sc8 6s;
+        }
+        #sc8 span:nth-child(5){
+            animation:sc8 7s;
+        }
+        #sc8 span:nth-child(6){
+            animation:sc8 8s;
+        }
+        #sc8 span:nth-child(7){
+            animation:sc8 9s;
+        }
 </style>
 <script>
-    
-    var jztimef=false
-window.onload=function()
-{
-    jztimef=true
-    var xiad=true
-		document.body.removeChild(jz)
-		document.body.removeChild(jz2q)
-        var fwcs=localStorage.getItem("fwcs")
-        if(typeof fwcs=="undefined"){
-            fwcs=1
-            localStorage.setItem("fwcs",1)
-            document.querySelector("#fwc").innerHTML=fwcs+"次"
-        }else{
-            fwcs++
-            localStorage.setItem("fwcs",fwcs)
-            document.querySelector("#fwc").innerHTML=fwcs+"次"
-        }
-        var yxsfjs=true
-        function gameover2(a){
-            if(yxsfjs){
-                yxks=false
-                var jsbeijing=document.createElement("div")
-                var jssize=document.createElement("div")
-                var jsbutton=document.createElement("div")
-                jsbeijing.id="jsbeijing"
-                jsbutton.id="jsbutton"
-                jssize.id="jssize"
-                jsbeijing.style.width=window.innerWidth+"px"
-                jsbeijing.style.height=window.innerHeight+"px"
-                jssize.innerHTML=a
-                jsbutton.innerHTML="确定"
-                document.body.appendChild(jsbeijing)
-                jsbeijing.appendChild(jsbutton)
-                jsbeijing.appendChild(jssize)
-                jsbutton.onclick=function(){
-                   document.body.removeChild(jsbeijing)
-                 //  document.exitFullscreen();
-              //  document.body.removeChild(beijing)
-                yxsfjs=true
-                }
-            }
-
-        
-            }
-            
-       document.getElementById("ksbutton").onclick= function (){
-        var yxks=true
-        var gameover=false
-        var wl=0
-        var kzf=true
-        var xdqz=""
-        for(var i=0;i<225;i++){
-            xdqz+="0"
-        }
-        xdqz=xdqz.split("")
-        var quanzhong=""
-        for(var i=0;i<225;i++){
-            quanzhong+="0"
-        }
-        quanzhong=quanzhong.split("")
-
-            document.documentElement.requestFullscreen();
-            var beijing=document.createElement("div")
-            var quxiao=document.createElement("div")
-            var qipanbk=document.createElement("div")
-            var qipanbk2=document.createElement("div")
-            var wlqipanbk=document.createElement("div")
-            var dagou=document.createElement("div")
-           
-            beijing.id="beijing"
-            quxiao.id="quxiao"
-            quxiao.style.top=20+"px"
-            quxiao.style.right=20+"px"
-            quxiao.onclick=function(){
-                document.exitFullscreen();
-                document.body.removeChild(beijing)
-            }
-            beijing.style.width=screen.availWidth+"px"
-            beijing.style.height=screen.availHeight+100+"px"
-
-            qipanbk.id="qipanbk"
-            qipanbk2.id="qipanbk2"
-            wlqipanbk.id="wlqipanbk"
-            dagou.id="dagou"
-            dagou.innerHTML="√"
-            
-
-
-
-            document.body.appendChild(beijing)
-            beijing.appendChild(quxiao)
-            beijing.appendChild(qipanbk)
-            beijing.appendChild(qipanbk2)
-            beijing.appendChild(wlqipanbk)
-            beijing.appendChild(dagou)
-            for(var i=0;i<225;i++){
-                var gezi=document.createElement("div")
-                gezi.className="gezi"
-                qipanbk.appendChild(gezi)
-            }
-            for(var i=0;i<225;i++){
-                var gezi2=document.createElement("div")
-                gezi2.className="gezi2"
-                gezi2.setAttribute("list",i)
-                wlqipanbk.appendChild(gezi2)
-            }
-            var gezi=document.querySelectorAll(".gezi")
-            for(var i=0;i<gezi.length;i++){
-                gezi[i].setAttribute("data","0")
-            }
-            gezi[112].innerHTML="<div id='center'></div>"
-            for(var i=0;i<196;i++){
-                var gezizs=document.createElement("div")
-                gezizs.className="gezizs"
-                qipanbk2.appendChild(gezizs)
-            }
-
-            var wlgz=document.querySelectorAll(".gezi2")
-            ////----
-            var box = []; //全部落子点
-    var wins = []; //全部赢的方法 三维数组
- 
-    for(var i = 0; i< 15 ;i++) {
-        box[i] = [];
-        wins[i] = [];
-        for(var j = 0; j < 15; j++) {
-            box[i][j] = 0;
-            wins[i][j] = [];
-        }
-    }
- 
-    
-    var count = 0; //总共赢的数量572种
-    //横向
-    for(var a = 0; a < 15; a++) {
-        for(var b = 0; b < 11;b++) {
-            //wins[0][0][0]
-            //wins[0][1][0]
-            //wins[0][2][0]
-            for(var c = 0; c < 5;c++) {
-                wins[a][b + c][count] = true;
-            }
-            count++;
-        }
-    }
-    //纵向
-    for(var a = 0; a < 15; a++) {
-        for(var b = 0; b < 11;b++) {
-            //wins[0][0][0]
-            //wins[0][1][0]
-            //wins[0][2][0]
-            for(var c = 0; c < 5;c++) {
-                wins[b + c][a][count] = true;
-            }
-            count++;
-        }
-    }
-    
-    //斜 '\'
-    for(var a = 0; a < 11; a++) {
-        for(var b = 0; b < 11;b++) {
-            //a = 0, b = 10
-            //win[0][10]
-            //win[1][11]
-            for(var c =0; c < 5;c++) {
-                wins[a + c][b + c][count] = true;
-            }
-            count++;
-        }
-    }
-    //反斜 '/'
-    for(var a = 0; a < 11; a++) {
-        for(var b = 4; b < 15;b++) {
-            //a = 0, b = 0
-            //win[0][5]
-            //win[1][4]
-            for(var c =0; c < 5;c++) {
-                wins[a + c][b - c][count] = true;
-            }
-            count++;
-        }
-    }
-    var myWin = []; //
-    var computerWin = [];
-    for(var i = 0; i < count;i++) {
-        myWin[i] = 0;
-        computerWin[i] = 0;
-    }
-            ////----
-            for(var i=0;i<wlgz.length;i++){
-               wlgz[i].onclick=function(){
-                var gezi=document.querySelectorAll(".gezi")
-                if(xiad){
-                    for(var i=0;i<wlgz.length;i++){
-                    wlgz[i].innerHTML=""
-                    wlgz[i].setAttribute("data",0)
-                   
-                }
-                  this.setAttribute("data",1)
-                  this.innerHTML="<div class='xd'>+</div>"
-
-                }
-               }
-            }
-            dagou.onclick=function(){
-                if(yxks){
-                    for(var i=0;i<wlgz.length;i++){
-               if(wlgz[i].getAttribute("data")=="1"){
-                if(xdqz[i]=="0"){
-                    var y=Math.floor(i/15)
-                    var x=i-y*15
-                    box[x][y]=1
-                    gezi[i].setAttribute("data","1")
-                gezi[i].innerHTML="<div class='black'></div>"
-                wlgz[i].innerHTML=""
-                wlgz[i].setAttribute("data",0)
-                xdqz[i]="1"
-                quanzhong[i]=0
-                kzf=false
-
-            for(var k = 0; k<count; k++) {
-                if(wins[x][y][k]) {
-                    myWin[k]++;
-                    computerWin[k] = 6; //因为我方在这个点上已经落子，所以计算机不可能在这个点上赢，
-                    if(myWin[k] == 5) {
-                        gameover2("玩家胜利")
-                        yxsfjs=false
-                        //over = true;
-                    }
-                }
-            }
-   
-                }
-                
-               }
-               
-            }    
-            //AI下法
-            function computerAI() {
-        var myScore = []; //我方分数
-        var computerScore = []; //计算机分数
-        var max = 0; //最大分数
-        var u = 0, v = 0; //最大分数点
-        for(var i =0; i < 15; i++) {
-            myScore[i] = [];
-            computerScore[i] = [];
-            for(var j =0; j < 15; j++) {
-                myScore[i][j] = 0;
-                computerScore[i][j] = 0;
-            }
-        }
- 
-        for(var i =0; i < 15; i++) {
-            for(var j =0; j < 15; j++) {
-                if(box[i][j] == 0) { //每个空闲点上进行计算分数
-                    for(var k =0;k<count;k++) { //遍历所有可以赢的，数量
-                        if(wins[i][j][k]) { //可以赢的点进行算分
- 
-                            if(myWin[k] == 1) {
-                                myScore[i][j] += 200;
-                            } else if(myWin[k] == 2) {
-                                myScore[i][j] += 400;
-                            } else if(myWin[k] == 3) {
-                                myScore[i][j] += 2000;
-                            } else if(myWin[k] == 4) {
-                                myScore[i][j] += 10000;
-                            }
- 
-                            if(computerWin[k] == 1) {
-                                computerScore[i][j] += 220;
-                            } else if(computerWin[k] == 2) {
-                                computerScore[i][j] += 420;
-                            } else if(computerWin[k] == 3) {
-                                computerScore[i][j] += 2100;
-                            } else if(computerWin[k] == 4) {
-                                computerScore[i][j] += 20000;
-                            }
-                        }
-                    }
- 
-                    //得出最大分数的点，并赋给u,v
-                    if(myScore[i][j] > max) {
-                        max = myScore[i][j];
-                        u = i;
-                        v = j;
-                    } else if(myScore[i][j] == max) {
-                        if(computerScore[i][j] > computerScore[u][v]) {
-                            u = i;
-                            v = j;
-                        }
-                    }
- 
-                    if(computerScore[i][j] > max) {
-                        max = computerScore[i][j];
-                        u = i;
-                        v = j;
-                    } else if(computerScore[i][j] == max) {
-                        if(myScore[i][j] > myScore[u][v]) {
-                            u = i;
-                            v = j;
-                        }
-                    }
- 
-                }//所有空闲点上进行计算分数
-            }
-        }
-        var zc=v*15+u
-        box[u][v]=2
-////////////////////
-          if(wl>0){
-               var t= document.querySelectorAll(".frist")
-              for(var y=0;y<t.length;y++){
-                t[y].className="white"
-              }
-             }
-            for(var i=0;i<225;i++){
-                
-                    gezi[zc].innerHTML="<div class='frist'></div>"
-                     
-             break
-                
-            }
-            kzf=true
-            wl+=1
-///////////////////
-        
-        
- 
-        for(var k = 0; k<count; k++) {
-            if(wins[u][v][k]) {
-                computerWin[k]++;
-                myWin[k] = 6;
-                if(computerWin[k] == 5) {
-                    gameover2('AI赢了')
-                    yxsfjs=false
-                }
-            }
-        }
-               }
-               computerAI()
-            }
-            }
-           
-        }
-}
+setTimeout(()=>{
+   var sc716=document.getElementById("sc716")
+   document.body.removeChild(sc716)
+},7100)
 </script>
-<body>
-<img src="https://pic.nximg.cn/file/20190323/27759913_091454896082_2.jpg" id="background"/>
-<button id="ksbutton">开始游戏</button>
-<h3 id="fw">你已访问</h3><h2 id="fwc">1</h2>
-<script>
-    jzd=0
-    var jz=document.createElement("div")
-    var jz2q=document.createElement("div")
-    var jz2=document.createElement("div")
-    var jz3=document.createElement("div")
-    jz.style.position="absolute"
-    jz.style.top=0
-    jz.style.left=0
-    jz.style.width=window.innerWidth+"px"
-    jz.style.height=window.innerHeight+"px"
-    jz.style.background="black"
-    jz.style.display="flex"
-    jz.style.color="white"
-    jz.innerHTML="加载中"
-    jz.style.fontSize=3+"vw"
-    jz.style.justifyContent="center"
-    jz.style.alignItems="center"
-    jz.style.zIndex=3
-    jz2q.style.position="absolute"
-    jz2q.style.width=40+"px"
-    jz2q.style.height=40+"px"
-    jz2q.style.top=window.innerHeight/2-18+"px"
-    jz2q.style.left=window.innerWidth/2+75+"px"
-    jz2q.style.border="3px solid black"
-    jz2q.style.zIndex=3
-    jz2.style.position="absolute"
-    jz2.style.width=35+"px"
-    jz2.style.height=35+"px"
-    jz2.style.border="5px solid white"
-    jz2.style.borderRadius="50%"
-    document.body.appendChild(jz)
-    document.body.appendChild(jz2q)
-    jz2q.appendChild(jz2)
-    var jz3t=parseInt(getComputedStyle(jz2).top)+20
-    var jz3l=parseInt(getComputedStyle(jz2).left)+20
-    jz3.style.position="absolute"
-    jz3.style.width=30+"px"
-    jz3.style.height=10+"px"
-    jz3.style.background="black"
-    jz3.style.top=jz3t+"px"
-    jz3.style.left=jz3l+"px"
-    jz2q.appendChild(jz3)
-    var jztime=requestAnimationFrame(function jztimer(){
-        jzd+=2
-        jz2q.style.transform="rotate("+jzd*Math.PI/180+"rad)"
-    
-        if(jztimef){
-            cancelAnimationFrame(jztime)
-        }else{
-            requestAnimationFrame(jztimer)
-        }  
-    })
-</script>
-</body>
+    </head>
+    <body>
+    <div id="sc716">
+        <img src="https://img-blog.csdnimg.cn/direct/845d5f51ad734bda9fdb76844fa497ee.png" id="nc"/>
+    <div id="banquan"><i>NC开发室</i></div>
+      <div id="sc8">
+        <span>s</span>
+        <span>c</span>
+        <span>h</span>
+        <span>o</span>
+        <span>o</span>
+        <span>l</span>
+        <span>8</span>
+      </div>
+    </div>
+    </body>
 </html>
