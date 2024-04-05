@@ -658,11 +658,117 @@
                 filter: brightness(180%);
            }
         }
+        #touxiang{
+            cursor: pointer;
+        }
+        #touxiang:active{
+            -webkit-filter: brightness(40%);
+                filter: brightness(40%);
+        }
+        #guanyuimg:active{
+            border:1px solid wheat;
+        }
+        #shangdianimg:active{
+            -webkit-filter: brightness(40%);
+                filter: brightness(40%);
+        }
+        #szimg:active{
+            -webkit-filter: brightness(40%);
+                filter: brightness(40%);
+        }
+        .body1{
+         
+            position: absolute;
+            top:0;
+            left:0;
+                z-index:4;
+                background: rgba(0, 0, 0, 0.8);
+                animation: body1 2s;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        }
+        @keyframes body1{
+            0%{
+                background: rgba(0, 0, 0, 0.1); 
+            }
+         
+            40%{
+                background: rgba(0, 0, 0, 0.6);
+            }
+        }
+        #tanchuang{
+            
+            width: 1000px;
+            height:600px;
+            background: wheat;
+            animation: tanchuang 3s;
+            border-radius:15px;
+            background: url(https://wallpaperm.cmcm.com/6b038778b9e9045a4fc5e7f665785a92.jpg);
+            -webkit-filter: brightness(120%);
+                filter: brightness(120%);
+        }
+        @keyframes tanchuang{
+           0%{
+            width: 10px;
+            height:6px;
+            border-radius:5px;
+            -webkit-filter: brightness(220%);
+                filter: brightness(220%);
+           }
+          
+            100%{
+                width: 1000px;
+            height:600px;
+            border-radius:10px;
+            }
+        }
+        .quxiao{
+            position: absolute;
+            top:5px;
+            right:5px;
+            width:50px;
+            -webkit-filter: brightness(60%);
+                filter: brightness(60%);
+                transform: rotate(0deg);
+                animation: quxiao 3s;
+            cursor: pointer;
+        }
+        @keyframes quxiao{
+           0%{
+            transform: rotate(270deg);
+           }
+        }
+
+
+
+  
 </style>
 <script>
-    
+
+        
     window.onload=function()
 {
+    
+   var yonghuid=localStorage.getItem("yonghuid")
+   var yonghudengji=localStorage.getItem("yonghudengji")
+   var yonghujingyian=localStorage.getItem("yonghujingyian")
+   if(yonghuid==null){
+       yonghuid=new Date()
+       yonghuid1=yonghuid.getFullYear();+""
+       yonghuid1+=yonghuid.getMonth();
+       yonghuid1+=yonghuid.getDate();
+       yonghuid1+=yonghuid.getSeconds();
+       yonghuid1+=yonghuid.getMinutes();
+       yonghudengji=0
+       yonghujingyian=0
+       localStorage.setItem("yonghuid",yonghuid1)
+       localStorage.setItem("yonghudengji",yonghudengji)
+       localStorage.setItem("yonghujingyian",yonghujingyian)
+       yonghuid=yonghuid1
+
+   }
+
    setTimeout(()=>{
    var sc716=document.getElementById("sc716")
    document.body.removeChild(sc716)
@@ -709,12 +815,15 @@
     touxiang.id="touxiang"
     touxiang.src="https://img.kxdw.com/2023/0213/20230213085258707.png"
     document.body.appendChild(touxiang)
+    touxiang.onclick=function(){
+        yonghuxi()
+    }
     var yhsiline=document.createElement("div")
     yhsiline.id="yhsiline"
     document.body.appendChild(yhsiline)
     var yhxingxi=document.createElement("div")
     yhxingxi.id="yhxingxi"
-    yhxingxi.innerHTML="用户ID:77234399 &nbsp;等级:72 &nbsp;经验:1148"
+    yhxingxi.innerHTML="用户ID:"+yonghuid+"&nbsp;等级:"+yonghudengji
     document.body.appendChild(yhxingxi)
     var shangdian=document.createElement("div")
     var shangdiantext=document.createElement("div")
@@ -754,6 +863,42 @@
       jrbutton.id="jrbutton"
    jrbutton.innerHTML="开始游戏"
    document.body.appendChild(jrbutton)
+  }
+  
+  function yonghuxi(){
+    var body1=document.createElement("div")
+    var tanchuang=document.createElement("div")
+    var quxiao=document.createElement("img")
+    body1.className="body1"
+    tanchuang.id="tanchuang"
+    quxiao.className="quxiao"
+    quxiao.src="https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/close.a35a1809.svg"
+    body1.style.width=innerWidth+"px"
+    body1.style.height=innerHeight+"px"
+    document.body.appendChild(body1)
+    body1.appendChild(tanchuang)
+    tanchuang.appendChild(quxiao)
+    quxiao.onclick=function(){
+        var tanchuangwidth=parseFloat(getComputedStyle(tanchuang).width)
+        var tanchuangheight=parseFloat(getComputedStyle(tanchuang).height)
+         var quxiaodeg=0
+         var body2=0.8
+        var quxiaotime=setInterval(()=>{
+             quxiaodeg++
+            tanchuangheight-=3
+            tanchuangwidth-=6
+            body2-=0.005
+            if(tanchuangheight<200){
+                clearInterval(quxiaotime)
+                document.body.removeChild(body1)
+            }
+                tanchuang.style.width=tanchuangwidth+"px"
+                tanchuang.style.height=tanchuangheight+"px"
+                quxiao.style.transform="rotate("+quxiaodeg+"deg)"
+                body1.style.background="rgba(0,0,0,"+body2+")"
+
+        },10)
+    }
   }
 }
 </script>
