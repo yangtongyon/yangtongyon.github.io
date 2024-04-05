@@ -599,6 +599,7 @@
            top:0;
            left:0;
            width:100px;
+           height:100px;
         }
         @keyframes guanyu{
             0%{
@@ -740,12 +741,12 @@
       
       var guanyu=document.createElement("div")
       var guanyutext=document.createElement("div")
-    var guanyuimg=document.createElement("img")
+    var guanyuimg=document.createElement("div")
     guanyu.id="guanyu"
     guanyutext.id="guanyutext"
     guanyuimg.id="guanyuimg"
     guanyutext.innerHTML="关于"
-    guanyuimg.src="http://icon.chrafz.com/uploads/allimg/170119/1-1F1191339130-L.png"
+    guanyuimg.innerHTML="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'><path d='M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z'></path></svg>"
     document.body.appendChild(guanyu)
       guanyu.appendChild(guanyuimg)
       guanyu.appendChild(guanyutext)
