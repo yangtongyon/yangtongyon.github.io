@@ -9,6 +9,40 @@
         margin: 0;
         padding: 0;
     }
+    *{
+    cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='20px' height='20px'><circle cx='4' cy='4' r='4' opacity='.5'/></svg>") 4 4, auto
+}
+#cursor {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background: #000;
+    border-radius: 50%;
+    opacity: 0.25;
+    z-index: 10086;
+    pointer-events: none;
+    transition: 0.2s ease-in-out;
+    transition-property: background, opacity, transform;
+}
+
+#cursor.hidden {
+    opacity: 0;
+}
+
+#cursor.hover {
+    opacity: 0.1;
+    transform: scale(2.5);
+}
+
+#cursor.active {
+    opacity: 0.5;
+    transform: scale(0.5);
+}
+
+
+
+
+
     #banquan{
      
     width: 300px;
@@ -325,7 +359,7 @@
     z-index: 2;
     font-weight: 600;
     background: url(https://wallpaperm.cmcm.com/6668612a93107d5f7980f9cceec2f833.jpg);
-    cursor: pointer;
+    
     -webkit-filter: brightness(320%);
                 filter: brightness(320%);
                 animation: ksbutton 2s;
@@ -357,7 +391,7 @@
     top: 439px;
     left: 830px;
     width: 10px;
-    height: 9.8%;
+    height: 71px;
     background: -webkit-linear-gradient(left, rgb(255 255 255 / 76%) 0%, rgb(255 255 255 / 67%) 50%, rgb(255 255 255 / 89%) 100%);
     transform: skewX(-30deg);
     z-index: 2;
@@ -620,8 +654,8 @@
     width: 270px;
     height: 70px;
     position: absolute;
-    left:1090px;
-    top:190px;
+    bottom: 75px;
+    right: 110px;
     border-radius: 16px;
     border: 1px solid #fff;
     background: rgba(204, 204, 204, 1);
@@ -635,7 +669,7 @@
     z-index: 3;
     font-weight: 600;
     background: url(https://wallpaperm.cmcm.com/6b038778b9e9045a4fc5e7f665785a92.jpg);
-    cursor: pointer;
+    
     -webkit-filter: brightness(220%);
                 filter: brightness(220%);
                 animation: jrbutton 3s;
@@ -647,20 +681,18 @@
         @keyframes jrbutton{
             0%{
                 position: absolute;
-                left:1190px;
+                right:0px;
                 -webkit-filter: brightness(10%);
                 filter: brightness(10%);
             }
            100%{
             position: absolute;
-            left:1090px;
+            right:110px;
             -webkit-filter: brightness(180%);
                 filter: brightness(180%);
            }
         }
-        #touxiang{
-            cursor: pointer;
-        }
+        
         #touxiang:active{
             -webkit-filter: brightness(40%);
                 filter: brightness(40%);
@@ -699,11 +731,9 @@
         }
         #tanchuang{
             
-            width: 1000px;
-            height:600px;
+           
             background: wheat;
             animation: tanchuang 3s;
-            border-radius:15px;
             background: url(https://wallpaperm.cmcm.com/6b038778b9e9045a4fc5e7f665785a92.jpg);
             -webkit-filter: brightness(120%);
                 filter: brightness(120%);
@@ -712,7 +742,7 @@
            0%{
             width: 10px;
             height:6px;
-            border-radius:5px;
+           
             -webkit-filter: brightness(220%);
                 filter: brightness(220%);
            }
@@ -720,36 +750,166 @@
             100%{
                 width: 1000px;
             height:600px;
-            border-radius:10px;
+       
             }
         }
         .quxiao{
             position: absolute;
-            top:5px;
-            right:5px;
+            top:10px;
+            right:10px;
             width:50px;
             -webkit-filter: brightness(60%);
                 filter: brightness(60%);
                 transform: rotate(0deg);
                 animation: quxiao 3s;
-            cursor: pointer;
+          pointer-events: auto;
+            z-index:4;
         }
         @keyframes quxiao{
            0%{
+            pointer-events: none;
             transform: rotate(270deg);
+           }
+           90%{
+            pointer-events: none;
+           }
+           100%{
+            pointer-events: auto;
            }
         }
 
 
-
-  
+        #yhxingxisize{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            top:0px;
+            background:url(https://wallpaperm.cmcm.com/6b038778b9e9045a4fc5e7f665785a92.jpg);
+            left: 0;
+            height:80px;
+            font-size: 2.7vw;
+            font-weight: 600;
+            color:#000000a8;
+            animation: yhxingxisize 3s;
+            -webkit-filter: brightness(260%);
+                filter: brightness(260%);
+                box-shadow: 0px 5px 3px black;
+        }
+        @keyframes yhxingxisize{
+            0%{
+                color:#2b2b2ba8;
+                width:10px;
+                font-size:0.05vw;
+                z-index:-1;
+                -webkit-filter: brightness(10%);
+                filter: brightness(10%);
+                
+            }
+            20%{
+                
+                z-index:-1;
+                -webkit-filter: brightness(20%);
+                filter: brightness(20%);
+               
+                
+            }
+            100%{
+                
+                -webkit-filter: brightness(240%);
+                filter: brightness(240%);
+            }
+        }
 </style>
 <script>
 
         
     window.onload=function()
 {
+    ///
+    var CURSOR;
+
+Math.lerp = (a, b, n) => (1 - n) * a + n * b;
+
+const getStyle = (el, attr) => {
+    try {
+        return window.getComputedStyle
+            ? window.getComputedStyle(el)[attr]
+            : el.currentStyle[attr];
+    } catch (e) {}
+    return "";
+};
+
+class Cursor {
+    constructor() {
+        this.pos = {curr: null, prev: null};
+        this.pt = [];
+        this.create();
+        this.init();
+        this.render();
+    }
+
+    move(left, top) {
+        this.cursor.style["left"] = `${left}px`;
+        this.cursor.style["top"] = `${top}px`;
+    }
+
+    create() {
+        if (!this.cursor) {
+            this.cursor = document.createElement("div");
+            this.cursor.id = "cursor";
+            this.cursor.classList.add("hidden");
+            document.body.append(this.cursor);
+        }
+
+        var el = document.getElementsByTagName('*');
+        for (let i = 0; i < el.length; i++)
+            if (getStyle(el[i], "cursor") == "pointer")
+                this.pt.push(el[i].outerHTML);
+
+        document.body.appendChild((this.scr = document.createElement("style")));
+        this.scr.innerHTML = `* {cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' width='20px' height='20px'><circle cx='4' cy='4' r='4' opacity='.5'/></svg>") 4 4, auto}`;
+    }
+
+    refresh() {
+        this.scr.remove();
+        this.cursor.classList.remove("hover");
+        this.cursor.classList.remove("active");
+        this.pos = {curr: null, prev: null};
+        this.pt = [];
+
+        this.create();
+        this.init();
+        this.render();
+    }
+
+    init() {
+        document.onmouseover  = e => this.pt.includes(e.target.outerHTML) && this.cursor.classList.add("hover");
+        document.onmouseout   = e => this.pt.includes(e.target.outerHTML) && this.cursor.classList.remove("hover");
+        document.onmousemove  = e => {(this.pos.curr == null) && this.move(e.clientX - 8, e.clientY - 8); this.pos.curr = {x: e.clientX - 8, y: e.clientY - 8}; this.cursor.classList.remove("hidden");};
+        document.onmouseenter = e => this.cursor.classList.remove("hidden");
+        document.onmouseleave = e => this.cursor.classList.add("hidden");
+        document.onmousedown  = e => this.cursor.classList.add("active");
+        document.onmouseup    = e => this.cursor.classList.remove("active");
+    }
+
+    render() {
+        if (this.pos.prev) {
+            this.pos.prev.x = Math.lerp(this.pos.prev.x, this.pos.curr.x, 0.15);
+            this.pos.prev.y = Math.lerp(this.pos.prev.y, this.pos.curr.y, 0.15);
+            this.move(this.pos.prev.x, this.pos.prev.y);
+        } else {
+            this.pos.prev = this.pos.curr;
+        }
+        requestAnimationFrame(() => this.render());
+    }
+}
+
+(() => {
+    CURSOR = new Cursor();
     
+})();
+    ///
    var yonghuid=localStorage.getItem("yonghuid")
    var yonghudengji=localStorage.getItem("yonghudengji")
    var yonghujingyian=localStorage.getItem("yonghujingyian")
@@ -760,6 +920,7 @@
        yonghuid1+=yonghuid.getDate();
        yonghuid1+=yonghuid.getSeconds();
        yonghuid1+=yonghuid.getMinutes();
+       yonghuid1+=yonghuid.getHours();
        yonghudengji=0
        yonghujingyian=0
        localStorage.setItem("yonghuid",yonghuid1)
@@ -866,6 +1027,8 @@
   }
   
   function yonghuxi(){
+    
+
     var body1=document.createElement("div")
     var tanchuang=document.createElement("div")
     var quxiao=document.createElement("img")
@@ -877,13 +1040,24 @@
     body1.style.height=innerHeight+"px"
     document.body.appendChild(body1)
     body1.appendChild(tanchuang)
+    tanchuang.style.width=innerWidth/1.488+"px"
+    tanchuang.style.height=innerHeight/1.25+"px"
     tanchuang.appendChild(quxiao)
+    var yhxingxisize=document.createElement("div")
+    yhxingxisize.id="yhxingxisize"
+    yhxingxisize.innerHTML="用户信息"
+    yhxingxisize.style.width=innerWidth/1.488+"px"
+    tanchuang.appendChild(yhxingxisize)
     quxiao.onclick=function(){
+        quxiao.style.pointerEvents="none"
         var tanchuangwidth=parseFloat(getComputedStyle(tanchuang).width)
         var tanchuangheight=parseFloat(getComputedStyle(tanchuang).height)
          var quxiaodeg=0
          var body2=0.8
+         var yhleft=400
+         var size2=parseFloat(getComputedStyle(yhxingxisize).fontSize)
         var quxiaotime=setInterval(()=>{
+            size2-=0.1
              quxiaodeg++
             tanchuangheight-=3
             tanchuangwidth-=6
@@ -896,6 +1070,8 @@
                 tanchuang.style.height=tanchuangheight+"px"
                 quxiao.style.transform="rotate("+quxiaodeg+"deg)"
                 body1.style.background="rgba(0,0,0,"+body2+")"
+                yhxingxisize.style.width=tanchuangwidth+"px"
+                yhxingxisize.style.fontSize=size2+"px"
 
         },10)
     }
