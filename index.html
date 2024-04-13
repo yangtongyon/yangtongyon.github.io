@@ -426,7 +426,7 @@
             top:0;
             left: 0;
             z-index:-3;
-            background:rgba(255,255,255,0.1);
+            background:rgba(255,255,255,0);
             animation: jiemiansg 2s;
         }
         @keyframes jiemiansg{
@@ -865,6 +865,49 @@
                 bottom:100px;
             }
         }
+
+        #xzbutton{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #blacksj{
+            position: absolute;
+            background: rgba(0, 0, 0, 0.5);
+            animation: blacksj 2s;
+        }
+        @keyframes blacksj{
+            0%{
+                background: rgba(0, 0, 0, 0.1);
+            }
+        }
+        #tc{
+            position: absolute;
+            border-radius:10px;
+            background: salmon;
+            animation: tc 2.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        @keyframes tc{
+            0%{
+                position: absolute;
+                top:0;
+            }
+        }
+        #buttonsj{
+            position: absolute;
+            background: #474242;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding:10px;
+            border-radius:10px;
+            padding-left:20px;
+            padding-right:20px;
+        }
 </style>
 <script>
 
@@ -955,6 +998,78 @@ class Cursor {
     
 })();
     ///
+    if (/(Android)/i.test(navigator.userAgent)) {
+       // console.log('安卓端')
+       var sc716=document.getElementById("sc716")
+      document.body.removeChild(sc716)
+      var body2=document.createElement("img")
+      var img2=document.createElement("img")
+      var beijing=document.createElement("div")
+      var sizetext=document.createElement("div")
+      var xzbutton=document.createElement("div")
+      //弹窗
+      var black=document.createElement("div")
+      var button=document.createElement("div")
+      var tc=document.createElement("div")
+      button.onclick=function(){
+        window.location.href="http://yangtongyon.github.io"
+      }
+      body2.src="https://ts1.cn.mm.bing.net/th/id/R-C.fdf6a827aac60fdcf798af4f91b59b1d?rik=ItKlp60usg%2fXuA&riu=http%3a%2f%2fup.deskcity.org%2fpic%2fd5%2f55%2f34%2fd5553434dcf49e5faf1688181613d764.jpg&ehk=HHOwfVMX%2bD%2b1SYcHUDrCshiXym1%2bgmawA4l9RdhBJdc%3d&risl=&pid=ImgRaw&r=0"
+      body2.style.width="100%"
+      body2.style.position="absolute"
+      body2.style.top=0
+      body2.style.height=innerHeight+'px'
+      img2.src="https://tse4-mm.cn.bing.net/th/id/OIP-C.9ui4ef2eyEe8seWMJX0YVAHaHa?rs=1&pid=ImgDetMain"
+      img2.style.width=innerWidth/6+"px"
+      img2.style.position="absolute"
+      img2.style.top=innerHeight/2.5+"px"
+      img2.style.left=innerWidth/2.4+"px"
+      beijing.style.position="absolute"
+      beijing.style.width=innerWidth/6*1.7+"px"
+      beijing.style.height=innerWidth/6*2.4+"px"
+      beijing.style.borderRadius="10px"
+      beijing.style.background="#453131b0"
+      beijing.style.top=innerHeight/2.8+"px"
+      beijing.style.left=innerWidth/2.78+"px"
+      beijing.style.zIndex="1"
+      img2.style.zIndex="2"
+      xzbutton.style.position="absolute"
+      xzbutton.style.width=innerWidth/6+"px"
+      xzbutton.style.height=innerHeight/6*0.2+"px"
+      xzbutton.style.top=innerHeight/4*2.1+"px"
+      xzbutton.style.left=innerWidth/4*1.67+"px"
+      xzbutton.style.zIndex="2"
+      xzbutton.style.background="#2c2d24ed"
+      xzbutton.id="xzbutton"
+      xzbutton.innerHTML="下载"
+      black.id="blacksj"
+      tc.id="tc"
+      black.style.width=innerWidth+"px"
+      black.style.height=innerHeight+"px"
+      tc.style.top=innerHeight/2.9+"px"
+      tc.style.left=innerWidth/5.2+"px"
+      tc.style.width=innerWidth/6*3.8+"px"
+      tc.style.height=innerWidth/6*2.5+"px"
+      tc.style.zIndex="3"
+      tc.innerHTML="提取码:7723"
+      tc.style.fontSize=innerWidth/20+"px"
+      button.id="buttonsj"
+      button.style.bottom="70px"
+      button.style.left="230px"
+      button.innerHTML="下载"
+      button.style.fontSize=innerWidth/22+"px"
+      xzbutton.onclick=function(){
+        document.body.appendChild(black)
+        document.body.appendChild(tc)
+        tc.appendChild(button)
+      }
+      document.body.appendChild(body2)
+      document.body.appendChild(img2)
+      document.body.appendChild(beijing)
+      document.body.appendChild(sizetext)
+      document.body.appendChild(xzbutton)
+    } else {
+      //  console.log('PC端')
    var yonghuid=localStorage.getItem("yonghuid")
    var yonghudengji=localStorage.getItem("yonghudengji")
    var yonghujingyian=localStorage.getItem("yonghujingyian")
@@ -1143,6 +1258,7 @@ class Cursor {
         },10)
     }
   }
+}
 }
 </script>
     </head>
