@@ -339,6 +339,7 @@
             }
         }
         #ksbutton{
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
             display: flex;
            pointer-events: auto;
     width: 270px;
@@ -451,6 +452,7 @@
             }
         }
         #touxiang{
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
             position: absolute;
             top: 30px;
             left: 40px;
@@ -521,7 +523,6 @@
             font-size:2vw;
             font-weight: 600;
             animation: yhxingxi 4s;
-            cursor: pointer;
         }
         @keyframes yhxingxi{
             0%{
@@ -555,6 +556,7 @@
             font-weight: 600;
         }
         #shangdianimg{
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
            position: absolute;
            top:0;
            left:0;
@@ -592,6 +594,7 @@
             font-weight: 600;
         }
         #szimg{
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
            position: absolute;
            top:0;
            left:0;
@@ -612,11 +615,12 @@
 
 
         #guanyu{
+            
             position: absolute;
             right:140px;
             top:40px;
-            cursor: pointer;
             animation: guanyu 3s;
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
         }
         #guanyutext{
             position: absolute;
@@ -627,6 +631,7 @@
             text-align: center;
             font-size:1.3vw;
             font-weight: 600;
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
         }
         #guanyuimg{
            position: absolute;
@@ -634,6 +639,10 @@
            left:0;
            width:100px;
            height:100px;
+
+        }
+        svg{
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
         }
         @keyframes guanyu{
             0%{
@@ -649,6 +658,7 @@
         }
 
         #jrbutton{
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
             display: flex;
            pointer-events: auto;
     width: 270px;
@@ -764,6 +774,7 @@
                 animation: quxiao 3s;
           pointer-events: auto;
             z-index:4;
+            cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
         }
         @keyframes quxiao{
            0%{
@@ -798,7 +809,7 @@
         }
         @keyframes yhxingxisize{
             0%{
-                color:#2b2b2ba8;
+                color:#00000026;
                 width:10px;
                 font-size:0.05vw;
                 z-index:-1;
@@ -807,7 +818,7 @@
                 
             }
             20%{
-                
+                color:#00000029;
                 z-index:-1;
                 -webkit-filter: brightness(20%);
                 filter: brightness(20%);
@@ -818,6 +829,40 @@
                 
                 -webkit-filter: brightness(240%);
                 filter: brightness(240%);
+            }
+        }
+        .bottomalert{
+            position: absolute;
+            display: flex;
+            width:100%;
+            justify-content: center;
+            align-items: center;
+            animation: bottomalert 1.3s;
+            z-index:4;
+            bottom: 100px;
+        }
+        .bottomalertson{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #171717c4;
+            font-size:1.7vw;
+            padding:20px;
+            padding-top:10px;
+            padding-bottom:10px;
+            border-radius:7px;
+            color: white;
+        }
+        @keyframes bottomalert{
+            0%{
+                position: absolute;
+                -webkit-filter: brightness(0%);
+                filter: brightness(0%);
+                bottom:0px;
+            }
+            100%{
+                position: absolute;
+                bottom:100px;
             }
         }
 </style>
@@ -997,6 +1042,9 @@ class Cursor {
       document.body.appendChild(shangdian)
       shangdian.appendChild(shangdianimg)
       shangdian.appendChild(shangdiantext)
+      shangdian.onclick=function(){
+      bottomalert("敬请期待")
+    }
       var sz=document.createElement("div")
       var sztext=document.createElement("div")
     var szimg=document.createElement("img")
@@ -1005,6 +1053,9 @@ class Cursor {
     szimg.id="szimg"
     sztext.innerHTML="设置 "
     szimg.src="https://ts1.cn.mm.bing.net/th/id/R-C.0847da0c9f99585c8d1c5063244b4eb5?rik=wrrw%2bayQxJkzNg&riu=http%3a%2f%2ficon.chrafz.com%2fuploads%2f151023%2f1-151023204Q0202.png&ehk=0wAM8Xx1WRTJp0ZS5XjE0O%2bCLDgsmDVSvUnBD0zi%2f9c%3d&risl=&pid=ImgRaw&r=0"
+    sz.onclick=function(){
+      bottomalert("敬请期待")
+    }
     document.body.appendChild(sz)
       sz.appendChild(szimg)
       sz.appendChild(sztext)
@@ -1025,7 +1076,23 @@ class Cursor {
    jrbutton.innerHTML="开始游戏"
    document.body.appendChild(jrbutton)
   }
-  
+  function bottomalert(text){
+    var test=text+""
+    var bottomalert=document.createElement("div")
+        var bottomalertson=document.createElement("div")
+        bottomalertson.innerHTML=test
+        bottomalert.className="bottomalert"
+        bottomalertson.className="bottomalertson"
+        document.body.appendChild(bottomalert)
+        bottomalert.appendChild(bottomalertson)
+        
+        var bottomalerttime=setTimeout(()=>{
+            
+              document.body.removeChild(bottomalert)
+              clearTimeout(bottomalerttime)
+              
+        },2000)
+  }
   function yonghuxi(){
     
 
@@ -1045,7 +1112,7 @@ class Cursor {
     tanchuang.appendChild(quxiao)
     var yhxingxisize=document.createElement("div")
     yhxingxisize.id="yhxingxisize"
-    yhxingxisize.innerHTML="用户信息"
+    yhxingxisize.innerHTML="用户中心"
     yhxingxisize.style.width=innerWidth/1.488+"px"
     tanchuang.appendChild(yhxingxisize)
     quxiao.onclick=function(){
