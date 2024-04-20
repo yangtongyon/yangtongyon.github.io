@@ -908,6 +908,41 @@
             padding-left:20px;
             padding-right:20px;
         }
+        #DJBODY,#YHXIBODY{
+            animation: DJBODY 2s;
+        }
+        @keyframes DJBODY{
+            0%{
+                width:0;
+                height:0;
+            }
+        }
+        #gfrzbody{
+            animation: DJBODY 2.7s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        progress::-webkit-progress-bar {
+    background:rgb(183 162 162);
+    block-size: 100%;
+    inline-size: 100%;
+    box-sizing: border-box;
+    -webkit-user-modify: read-only !important;
+    border-radius:10px;
+    -webkit-filter: brightness(80%);
+                filter: brightness(80%);
+}
+progress::-webkit-progress-value {
+    background:url(http://api.lvyestudy.com/upload/courses/g89fb7394115b0fe97743549.jpg);
+    block-size: 100%;
+    inline-size: 50%;
+    box-sizing: border-box;
+    -webkit-user-modify: read-only !important;
+    border-radius:10px;
+}
+
 </style>
 <script>
 
@@ -915,6 +950,7 @@
     window.onload=function()
 {
     ///
+    localStorage.setItem("yonghujingyian",576)
     var CURSOR;
 
 Math.lerp = (a, b, n) => (1 - n) * a + n * b;
@@ -1087,7 +1123,7 @@ class Cursor {
        localStorage.setItem("yonghudengji",yonghudengji)
        localStorage.setItem("yonghujingyian",yonghujingyian)
        yonghuid=yonghuid1
-
+       
    }
 
    setTimeout(()=>{
@@ -1144,7 +1180,7 @@ class Cursor {
     document.body.appendChild(yhsiline)
     var yhxingxi=document.createElement("div")
     yhxingxi.id="yhxingxi"
-    yhxingxi.innerHTML="用户ID:"+yonghuid+"&nbsp;等级:"+yonghudengji
+    yhxingxi.innerHTML="用户ID:"+yonghuid+"&nbsp;等级:"+Math.floor(parseInt(localStorage.getItem("yonghujingyian"))/200)
     document.body.appendChild(yhxingxi)
     var shangdian=document.createElement("div")
     var shangdiantext=document.createElement("div")
@@ -1214,37 +1250,140 @@ class Cursor {
     var body1=document.createElement("div")
     var tanchuang=document.createElement("div")
     var quxiao=document.createElement("img")
+    var TX=document.createElement("img")
+    var YHXIBODY=document.createElement("div")
+    var DJBODY=document.createElement("div")
+    var DJJDT=document.createElement("progress")
+    var DJ1=document.createElement("div")
+    var DJ2=document.createElement("div")
+    var FC=document.createElement("div")
+    var gfrzbody=document.createElement("div")
+    TX.style.cssText="display:none;width:"+innerWidth/15+"px;"+"position:absolute;index:4;top:90px;left:90px;-webkit-filter:brightness(160%);filter:brightness(160%);background:rgb(130 118 118);border-radius:5px;border:3px solid white;"
+    TX.src="http://icon.chrafz.com/uploads/151117/1-15111G64635L5.png"
+    YHXIBODY.style.cssText="display:none;position:absolute;width:"+innerWidth/1.488/2+"px;height:"+innerHeight/1.25/3+"px;background:rgb(255 255 255 / 68%);z-index:-1;top:"+160+"px;border-radius:8px;left:6px;"
+    YHXIBODY.id="YHXIBODY"
     body1.className="body1"
     tanchuang.id="tanchuang"
     quxiao.className="quxiao"
+    gfrzbody.id="gfrzbody"
     quxiao.src="https://s1.hdslb.com/bfs/seed/jinkela/short/mini-login-v2/img/close.a35a1809.svg"
     body1.style.width=innerWidth+"px"
     body1.style.height=innerHeight+"px"
+
+    DJBODY.style.cssText="display:none;position:absolute;width:"+innerWidth/1.488/2+"px;height:"+innerHeight/1.25/3.3+"px;background:rgb(255 255 255 / 68%);z-index:-1;top:"+400+"px;border-radius:8px;left:6px;displaiy:flex;justify-content: center;align-items:center;"
+    DJBODY.id="DJBODY"
+
+    DJJDT.style.cssText="width:"+innerWidth/1.488/3+"px;"+"height:"+13+"px;"+"background:blue;border-radius:10px;"
+    DJJDT.max="200"
+    DJJDT.value=parseInt(localStorage.getItem("yonghujingyian"))%200
+    DJ1.innerHTML="等级"+Math.floor(parseInt(localStorage.getItem("yonghujingyian"))/200)
+    DJ2.innerHTML="等级"+(Math.floor(parseInt(localStorage.getItem("yonghujingyian"))/200)+1)
+    FC.innerHTML=parseInt(localStorage.getItem("yonghujingyian"))%200+"/200"
     document.body.appendChild(body1)
     body1.appendChild(tanchuang)
+
     tanchuang.style.width=innerWidth/1.488+"px"
     tanchuang.style.height=innerHeight/1.25+"px"
+
     tanchuang.appendChild(quxiao)
+    tanchuang.appendChild(TX)
+    tanchuang.appendChild(YHXIBODY)
+    tanchuang.appendChild(DJBODY)
+    DJBODY.appendChild(DJJDT)
+
+    var YHID=document.createElement("div")
+    var YUDJ=document.createElement("div")
+    var YHJY=document.createElement("div")
+
+    var YHIDtext=document.createElement("div")
+    var YUDJtext=document.createElement("div")
+    var YHJYtext=document.createElement("div")
+    YHID.innerHTML=localStorage.getItem("yonghuid")+""
+    YUDJ.innerHTML=Math.floor(parseInt(localStorage.getItem("yonghujingyian"))/200)+""
+    YHJY.innerHTML=localStorage.getItem("yonghujingyian")+""
+    YHIDtext.innerHTML="ID"
+    YUDJtext.innerHTML="等级"
+    YHJYtext.innerHTML="经验"
+
+    DJ1.style.cssText="font-size:"+innerWidth/1.488/2/24+"px;"+"position:absolute;"+"left:"+10+"px;"
+    DJ2.style.cssText="font-size:"+innerWidth/1.488/2/24+"px;"+"position:absolute;"+"right:"+10+"px;"
+    FC.style.cssText="font-size:"+innerWidth/1.488/2/24+"px;"+"position:absolute;"+"top:"+45+"px;"
+    DJBODY.appendChild(DJ1)
+    DJBODY.appendChild(DJ2)
+    
     var yhxingxisize=document.createElement("div")
     yhxingxisize.id="yhxingxisize"
     yhxingxisize.innerHTML="用户中心"
     yhxingxisize.style.width=innerWidth/1.488+"px"
     tanchuang.appendChild(yhxingxisize)
+     //gf
+     gfrzbody.style.cssText="width:"+innerWidth*0.28+"px;"+"height:"+innerWidth*0.28+"px;"+"background:linear-gradient(rgb(0 136 255 / 74%), rgb(18 15 15));"+"position:absolute;top:160px;right:15px;border-radius:15px;"
+     var zsimg=document.createElement("img")
+     var gfrztext=document.createElement("div")
+     var fa=document.createElement("div")
+     gfrztext.innerHTML="官方认证"
+     zsimg.src="http://icon.chrafz.com/uploads/160919/1-160919154934C0.png"
+     zsimg.style.cssText="width:"+120+"px;"
+     gfrztext.style.cssText="position:absolute;bottom:100px;color:#2997f7;"+"font-size:"+innerWidth/1.488/2/20+"px;"+"font-weight:600;"
+    tanchuang.appendChild(gfrzbody)
+    fa.style.cssText="color:#ff5473;font-weight:600;position:absolute;bottom:50px;"+"font-size:"+innerWidth/1.488/2/26+"px;"
+    fa.innerHTML="您的账号行为正常！"
+    var YU=setTimeout(()=>{
+       TX.style.display="block"
+       YHXIBODY.style.display="flex"
+       DJBODY.style.display="flex"
+       DJBODY.appendChild(FC)
+       clearTimeout(YU)
+    },1000)
+    var YHXTIME=setInterval(()=>{
+        YHXIBODY.appendChild(YHID)
+    YHXIBODY.appendChild(YUDJ)
+    YHXIBODY.appendChild(YHJY)
+     
+    YHXIBODY.appendChild(YHIDtext)
+    YHXIBODY.appendChild(YUDJtext)
+    YHXIBODY.appendChild(YHJYtext)
+
+    gfrzbody.appendChild(zsimg)
+    gfrzbody.appendChild(gfrztext)
+    gfrzbody.appendChild(fa)
+    for(var i=0;i<3;i++){
+        document.querySelectorAll("#YHXIBODY div")[i].style.cssText="position:absolute;font-size:"+innerWidth/1.488/2/22+"px;top:"+70+"px;left:"+(i+1)*116+"px;color:black;font-weight:400;pidding:5px;displaiy:flex;justify-content: center;align-items:center;"
+    }
+    for(var i=3;i<6;i++){
+        
+        document.querySelectorAll("#YHXIBODY div")[i].style.cssText="position:absolute;font-size:"+innerWidth/1.488/2/22+"px;color:#4e5358;top:"+110+"px;left:"+(i-2)*116+"px;"
+    }
+    clearTimeout(YHXTIME)
+    },1800)
     quxiao.onclick=function(){
         quxiao.style.pointerEvents="none"
         var tanchuangwidth=parseFloat(getComputedStyle(tanchuang).width)
         var tanchuangheight=parseFloat(getComputedStyle(tanchuang).height)
+        var THW=parseFloat(getComputedStyle(YHXIBODY).width)
+        var THH=parseFloat(getComputedStyle(YHXIBODY).height)
+        var DJH=parseFloat(getComputedStyle(DJBODY).height)
+        var DJW=parseFloat(getComputedStyle(DJBODY).width)
+        var DJT=parseFloat(getComputedStyle(DJBODY).top)
+        var GFW=parseFloat(getComputedStyle(gfrzbody).width)
          var quxiaodeg=0
          var body2=0.8
          var yhleft=400
          var size2=parseFloat(getComputedStyle(yhxingxisize).fontSize)
+         
         var quxiaotime=setInterval(()=>{
             size2-=0.1
              quxiaodeg++
             tanchuangheight-=3
-            tanchuangwidth-=6
+            tanchuangwidth-=3
+            THW-=1
+            THH-=1
             body2-=0.005
-            if(tanchuangheight<200){
+            DJH-=1.5
+            DJW-=1
+            DJT-=1.5
+            GFW-=3
+            if(tanchuangheight<300){
                 clearInterval(quxiaotime)
                 document.body.removeChild(body1)
             }
@@ -1254,7 +1393,14 @@ class Cursor {
                 body1.style.background="rgba(0,0,0,"+body2+")"
                 yhxingxisize.style.width=tanchuangwidth+"px"
                 yhxingxisize.style.fontSize=size2+"px"
-
+                 YHXIBODY.style.width=THW+"px"
+                 YHXIBODY.style.height=THH+"px"
+                 DJBODY.style.height=DJH+"px"
+                 DJBODY.style.width=DJW+"px"
+                 DJBODY.style.top=DJT+"px"
+                 gfrzbody.style.height=GFW+"px"
+                 gfrzbody.style.width=GFW+"px"
+       
         },10)
     }
   }
