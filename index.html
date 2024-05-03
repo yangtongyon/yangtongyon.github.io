@@ -39,10 +39,6 @@
     transform: scale(0.5);
 }
 
-
-
-
-
     #banquan{
      
     width: 300px;
@@ -59,6 +55,7 @@
     
     }
     body{
+        overflow: hidden;
         background:rgba(0, 0, 0, 0.999);
         -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -66,6 +63,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    
         }
     #nc{
         position: absolute;
@@ -942,14 +940,349 @@ progress::-webkit-progress-value {
     -webkit-user-modify: read-only !important;
     border-radius:10px;
 }
+.GYsj{
+    position: absolute;
+    top:50px;
+    right:100px;
+    border:40px solid rgba(0, 0, 0, 0);
+    border-left: 40px solid rgba(0, 0, 0, 0.892);
+    z-index:5;
+    animation: GYsj 1.5s;
+}
+@keyframes GYsj{
+    0%{
+        border-left: 40px solid rgba(236, 227, 227, 0);
+    }
+    100%{
+        border-left: 40px solid rgba(0, 0, 0, 0.892);
+    }
+}
+#GYtext{
+    position: absolute;
+    top:50px;
+    right:180px;
+    width:300px;
+    height:330px;
+    background:linear-gradient(rgba(0, 0, 0, 0.892), rgba(0, 0, 0, 0.458));
+    animation: GYtext 1s;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes GYtext{
+    0%{
+        width:10px;
+        height:40px;
+        background: 0;
+    }
+    100%{
+        width:300px;
+        height:330px;
+        background:linear-gradient(rgba(0, 0, 0, 0.892), rgba(0, 0, 0, 0.458));
+    }
+}
+#gysize{
+    position: absolute;
+    font-size:2vw;
+    bottom:40px;
+    color: wheat;
+    cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
+    font-weight: 600;
+}
+#ksgamebody{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 7;
+}
+#ksgamebody2{
+    position:absolute;
+    cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
+    background: rgba(0, 0, 0, 0.955);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   animation: ksgamebody 1s ease,ksgamebody2 1.2s ease 1s;
+}
+@keyframes ksgamebody{
+    0%{
+        border-radius:8px;
+        bottom:0px;
+        position:absolute;
+        width:140px;
+    height:70px;
+    }
 
+    100%{
+        border-radius:8px;
+        width:140px;
+    height:70px;
+        bottom:310px;
+        position:absolute;
+    }
+}
+@keyframes ksgamebody2{
+    0%{
+    
+        width:140px;
+    height:70px;
+    }
+
+    100%{
+        width:100vw;
+    height:100vh;
+        position:absolute;
+    }
+}
+#gameline{
+    cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
+    width:95%;
+    height:55%;
+    border:4px solid white;
+    border-left:0;
+    border-right: 0;
+    animation: gameline 4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@keyframes gameline{
+    0%{
+        width:4%;
+    height:55%;
+        display: none;
+    }
+    40%{
+        display: none;
+    }
+    50%{
+        width:20%;
+        -webkit-filter: brightness(20%);
+    filter: brightness(20%);
+    }
+    100%{
+        width:95%;
+    height:55%;
+        -webkit-filter: brightness(220%);
+    filter: brightness(220%);
+    }
+}
+#kstext{
+    cursor:url(	https://www.cunshao.com/666666/meihua/img/5ccab616ea9c8.cur),pointer;
+    position:absolute;
+    top:60px;
+    font-size:2.7vw;
+    font-weight: 600;
+    color: #888;
+    animation: kstext 3s;
+    -webkit-filter: brightness(120%);
+    filter: brightness(120%);
+    display:flex;
+}
+@keyframes kstext{
+    0%{
+        display:none;
+    }
+    40%{
+        display:none;
+    }
+    80%{
+        display:flex;
+        -webkit-filter: brightness(60%);
+    filter: brightness(60%);
+    }
+}
+#ksgamequxiao{
+    cursor:url(https://www.cunshao.com/666666/meihua/img/5ccab63d8fc80.cur), pointer;
+    position: absolute;
+    -webkit-filter: brightness(230%);
+    filter: brightness(230%);
+    width:70px;
+    height:70px;
+    top:45px;
+    left:45px;
+    animation: ksgamequxiao 3s;
+    display: flex;
+}
+@keyframes ksgamequxiao{
+    0%{
+        width:170px;
+    height:170px;
+    position: absolute;
+    display: none;
+    }
+    40%{
+        width:170px;
+    height:170px;
+    position: absolute;
+    display: none;
+    }
+    50%{
+        width:170px;
+    height:170px;
+    position: absolute;
+    display: flex;
+    }
+    70%{
+        display: flex;
+        position: absolute;
+    }
+    100%{
+        display: flex;
+        position: absolute;
+    }
+}
+@keyframes ksfh {
+    0%{
+        position: absolute;
+        top:0px;
+    }
+    100%{
+        position: absolute;
+        top:1000px;
+    }
+}
+#playgamebutton{
+    cursor:url(https://www.cunshao.com/666666/meihua/img/5ccab63d8fc80.cur), pointer;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom:45px;
+    width:19%;
+    height:12%;
+    background:0;
+    border-radius:15px;
+    animation:playgamebutton 4s;
+    font-weight: 600;
+    font-size:270%;
+    color:#0ebeff;
+    border:0;
+    z-index:4;
+    overflow:hidden;
+}
+@keyframes playgamebutton{
+    0%{
+        -webkit-filter: brightness(0%);
+    filter: brightness(0%);
+    position: absolute;
+    bottom:-30px;
+    display: none;
+    }
+    40%{
+        display: none;
+        -webkit-filter: brightness(0%);
+    filter: brightness(0%);
+    position: absolute;
+    bottom:-30px;
+    }
+    100%{
+        -webkit-filter: brightness(100%);
+    filter: brightness(100%);
+    position: absolute;
+    bottom:45px;
+    }
+}
+#playgamebutton::before{
+    content:'';
+    position: absolute;
+    width:200%;
+    height:200%;
+    background: #0ebeff70;
+    z-index:-3;
+    left: 50%;
+    top: 50%;
+    animation: root 2s linear infinite;
+    transform-origin: left top;
+}
+#playgamebutton::after{
+    content:'';
+    position: absolute;
+    width:97.5%;
+    height:93.5%;
+    left:3px;
+    top:3px;
+    background:rgba(0,0,0,0.95);
+    z-index: -2;
+    border-radius: inherit;
+}
+@keyframes root{
+    to{
+        transform: rotate(1turn);
+    }
+}
+#playgamebutton:hover{
+    background:#2eaedc26;
+}
+#playgamebutton:active {
+    
+    -webkit-filter: brightness(1000%);
+    filter: brightness(1000%);
+}
+.yxms{
+display: flex;
+width:20%;
+height:65%;
+/*background: #0ebeff;*/
+margin-left:5%;
+animation: yxms 2.2s;
+justify-content: center;
+align-items: center;
+}
+@keyframes yxms{
+    0%{
+        margin-left:400%;
+        margin-right:400%;
+        display: flex;
+        width:20%;
+        height:65%;
+        display: none;
+    }
+    100%{
+        display: flex;
+        margin-right:0%;
+        margin-left:5%;
+        display: flex;
+        width:20%;
+        height:65%;
+    }
+}
+.yxmsvalue{
+    cursor:url(https://www.cunshao.com/666666/meihua/img/5ccab63d8fc80.cur), pointer;
+    width:100%;
+    height:20%;
+    z-index:8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:-100%;
+    background: #0ebeff;
+    font-size:1.4vw;
+    font-weight: 600;
+    color: white;
+    animation:  yxms2 4s;
+}
+@keyframes yxms2{
+    0%{
+        display: none;
+        margin-bottom:-60%;
+    }
+    40%{
+        display: none;
+    }
+    100%{
+        margin-bottom:-100%;
+        display: flex;
+    }
+}
 </style>
+
 <script>
 
-        
     window.onload=function()
 {
-    ///
+   
     var CURSOR;
 
 Math.lerp = (a, b, n) => (1 - n) * a + n * b;
@@ -1127,7 +1460,9 @@ class Cursor {
 
    setTimeout(()=>{
    var sc716=document.getElementById("sc716")
-   document.body.removeChild(sc716)
+   //document.body.removeChild(sc716)
+   sc716.style.zIndex=-1
+   sc716.style.display="none"
    var body=document.querySelector("body")
    body.style.background="white"
    body.style.background="url(https://wallpaperm.cmcm.com/6b038778b9e9045a4fc5e7f665785a92.jpg)"
@@ -1155,12 +1490,17 @@ class Cursor {
    }
    },7100)
   function playgame(){
+    var sc716=document.getElementById("sc716")
+        sc716.style.display="flex"
+    document.getElementById("sc8").style.display="flex"
+    document.getElementById("nc").style.display="none"
     document.body.removeChild(haizhan)
     document.body.removeChild(qi)
     document.body.removeChild(size2)
     document.body.removeChild(ksbutton)
     document.body.removeChild(flash)
     var jiemiansg=document.createElement("div")
+    
     jiemiansg.id="jiemiansg"
     jiemiansg.style.width=innerWidth+"px"
     jiemiansg.style.height=innerHeight+"px"
@@ -1219,12 +1559,149 @@ class Cursor {
     guanyutext.innerHTML="关于"
     guanyuimg.innerHTML="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='currentColor'><path d='M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z'></path></svg>"
     document.body.appendChild(guanyu)
+    
       guanyu.appendChild(guanyuimg)
       guanyu.appendChild(guanyutext)
+      var GYsj=document.createElement("div")
+      GYsj.className="GYsj"
+      document.body.appendChild(GYsj)
+      GYsj.style.display="none"
+      var GYtext=document.createElement("div")
+      GYtext.id="GYtext"
+      document.body.appendChild(GYtext)
+      GYtext.style.display="none"
+      var guanyukg=true
+      var gysize=document.createElement("div")
+            gysize.id="gysize"
+            gysize.innerHTML="关于NC"
+            GYtext.appendChild(gysize)
+            gysize.onclick=function(){
+                window.location.href=""
+            }
+     guanyu.addEventListener("click",function(){
+        if(guanyu){
+            GYsj.style.display="flex"
+        GYtext.style.display="flex"
+        guanyu=false
+        var NC=document.getElementById("nc")
+        var NCTIME=setTimeout(()=>{
+            NC.style.display="flex"
+            clearTimeout(NCTIME)
+        },1100)
+        NC.style.background="0"
+        NC.style.animation="0"
+        NC.style.width="180px"
+        NC.style.top="100px"
+        NC.style.left=innerWidth/25*18+"px"
+        }else{
+            var NC=document.getElementById("nc")
+            GYsj.style.display="none"
+         GYtext.style.display="none"
+         NC.style.display="none"
+         guanyu=true
+        }
+      
+     },false)
       var jrbutton=document.createElement("div")
       jrbutton.id="jrbutton"
    jrbutton.innerHTML="开始游戏"
    document.body.appendChild(jrbutton)
+
+    jrbutton.onclick=function(){
+
+        var ksgamebody=document.createElement("div")
+        ksgamebody.id="ksgamebody"
+        ksgamebody.style.width=innerWidth+"px"
+        ksgamebody.style.height=innerHeight+"px"
+        var ksgamebody2=document.createElement("div")
+        ksgamebody2.id="ksgamebody2"
+        ksgamebody2.style.width=innerWidth+"px"
+        ksgamebody2.style.height=innerHeight+"px"
+        var gameline=document.createElement("div")
+        gameline.id="gameline"
+        document.body.appendChild(ksgamebody)
+        ksgamebody.appendChild(ksgamebody2)
+        ksgamebody2.appendChild(gameline)
+        var kstext=document.createElement("div")
+        kstext.innerHTML="请选择游戏模式"
+        kstext.id="kstext"
+        ksgamebody2.appendChild(kstext)
+        var ksgamequxiao=document.createElement("img")
+        ksgamequxiao.id="ksgamequxiao"
+        ksgamequxiao.src="https://gd-hbimg.huaban.com/fa6925d13920a2b3d629dbc3863d6c890323379355f8-fRASr3_fw658"
+        ksgamebody2.appendChild(ksgamequxiao)
+        var playgamebutton=document.createElement("div")
+        playgamebutton.id="playgamebutton"
+        playgamebutton.innerHTML="确定"
+        ksgamebody2.appendChild(playgamebutton)
+        var yxmssrc=["https://imgo.hackhome.com/img2021/10/4/0/531064099.jpg","https://img.kxdw.com/2023/0213/20230213090032442.jpg","https://ts1.cn.mm.bing.net/th/id/R-C.1330d78e58a7d1f3ba59afe7ed95e0fa?rik=31TO1CrITvsDcA&riu=http%3a%2f%2fimg.kxdw.com%2f2023%2f0213%2f20230213085326453.jpg&ehk=mqsnXuKg6lJqmMZqXfVMCyTQAkAZLxRQ2by2bmEB%2bWk%3d&risl=&pid=ImgRaw&r=0"]
+        var yxmstext=["双人模式","人机大战","匹配对战"]
+        for(var i=0;i<3;i++){
+            var yxms=document.createElement("div")
+            var yxmsvalue=document.createElement("div")
+        yxms.className="yxms"
+        yxms.style.background='url('+yxmssrc[i]+')'
+        gameline.appendChild(yxms)
+        yxmsvalue.className="yxmsvalue"
+        yxmsvalue.innerHTML=yxmstext[i]
+        yxms.appendChild(yxmsvalue)
+        yxmsvalue.onclick=function(){
+            var YXMS=document.querySelectorAll(".yxmsvalue")
+            for(var i=0;i<YXMS.length;i++){
+              YXMS[i].style.cssText="-webkit-filter: brightness(100%);filter: brightness(100%);"
+            }
+            this.style.cssText="-webkit-filter: brightness(60%);filter: brightness(60%);"
+          }
+        }
+        var yzmszb=[500,800,1200]
+        window.onmousemove=function(e){
+            var YXMS2=document.querySelectorAll(".yxms")
+                   for(var i=0;i<YXMS2.length;i++){
+                  YXMS2[i].style.width="20%"
+                  YXMS2[i].style.height="65%"
+                  }
+            var ey=e.clientY
+            var ex=e.clientX
+            if(ey<550&&ey>190){
+                var best=0
+                var best2=4
+                for(var i=0;i<yzmszb.length;i++){
+                   if((ex-yzmszb[i])**2>best){
+                        best=(ex-yzmszb[i])**2
+                        best2-=1
+                   }else{
+                        best=best
+                   }
+                }
+                if(best2==3){
+                    YXMS2[2].style.width="23%"
+                  YXMS2[2].style.height="69%"
+                }else if(best2==2){
+                    YXMS2[1].style.width="23%"
+                  YXMS2[1].style.height="69%"
+                }else if(best2==1){
+                    YXMS2[0].style.width="23%"
+                  YXMS2[0].style.height="69%"
+                }
+            }else{
+                var YXMS2=document.querySelectorAll(".yxms")
+                   for(var i=0;i<YXMS2.length;i++){
+                  YXMS2[i].style.width="20%"
+                  YXMS2[i].style.height="65%"
+                  }
+            }
+        }
+        ksgamequxiao.onclick=function (){
+            window.onmousemove=function(e){
+            return false;
+        }
+            ksgamebody.style.cssText="animation:ksfh 2s;width:100vw;height:100vh;"
+            var ksfh=setTimeout(()=>{
+             document.body.removeChild(ksgamebody)
+            },2000)
+        }
+    }
+
   }
   function bottomalert(text){
     var test=text+""
