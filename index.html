@@ -1286,16 +1286,15 @@ align-items: center;
     align-items: center;
 }
 #Alerttext{
-    background: linear-gradient(rgb(122 103 164 / 74%), rgb(18, 15, 15));
-    border-radius:15px;
+    background:#565656;
+    background: url(https://wallpaperm.cmcm.com/6b038778b9e9045a4fc5e7f665785a92.jpg);
    animation: Alerttext 1s;
    position: absolute;
    display: flex;
     justify-content: center;
     align-items: center;
-    font-size:225%;
-    color: white;
     font-weight: 600;
+    
 }
 @keyframes Alerttext{
     0%{
@@ -1305,25 +1304,68 @@ align-items: center;
     
 }
 #Alertbutton{
-    cursor:url(https://www.cunshao.com/666666/meihua/img/5ccab63d8fc80.cur), pointer;
+    cursor: url(https://www.cunshao.com/666666/meihua/img/5ccab63d8fc80.cur), pointer;
     color: white;
-    width:270px;
-    height:95px;
-    background: linear-gradient(rgba(0, 136, 255, 0.74), rgb(18, 15, 15));
+    width: 180px;
+    height: 55px;
+    background:#0998cc;
     position: absolute;
-    bottom:30px;
+    bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size:105%;
+    font-size: 195%;
     font-weight: 600;
-    border-radius:15px;
+    border-radius: 5px;
 }
 iframe{
     position: absolute;
-    top: 0;
-    left:0;
+    top: 0px;
+    left:0px;
     z-index:10;
+   overflow: hidden;
+}
+#Iframequxiao{
+    position: absolute;
+    top:15px;
+    left:15px;
+    z-index:13;
+    width:70px;
+    height:70px;
+    cursor:url(https://www.cunshao.com/666666/meihua/img/5ccab63d8fc80.cur), pointer;
+    -webkit-filter: brightness(90%);
+    filter: brightness(90%);
+}
+#Title{
+    position: absolute;
+    top: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 26%;
+    font-size: 70px;
+    font-weight: 600;
+    background:linear-gradient(to right, #6f6fe0e3, #d7d7f865);/*#6f6fe0e3;*/
+    padding: 0;
+    box-shadow: 0px 5px 3px black;
+    color:#ffffffc9;
+
+}
+#tding{
+    position: absolute;
+    top: 29%;
+    width: 95%;
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(102 235 210 / 65%);
+    font-size: 350%;
+    color: #ffffffc4;
+    font-weight: 600;
+    border-radius: 10px;
+
 }
 </style>
 
@@ -1550,8 +1592,8 @@ class Cursor {
     var jiemiansg=document.createElement("div")
     
     jiemiansg.id="jiemiansg"
-    jiemiansg.style.width=innerWidth+"px"
-    jiemiansg.style.height=innerHeight+"px"
+    jiemiansg.style.width=100+"%"
+    jiemiansg.style.height=100+"%"
     var body=document.querySelector("body")
     body.style.background="url(https://wallpaperm.cmcm.com/6668612a93107d5f7980f9cceec2f833.jpg)"
     document.body.appendChild(jiemiansg)
@@ -1559,6 +1601,7 @@ class Cursor {
     touxiang.id="touxiang"
     touxiang.src="https://img.kxdw.com/2023/0213/20230213085258707.png"
     document.body.appendChild(touxiang)
+
     touxiang.onclick=function(){
         yonghuxi()
     }
@@ -1568,6 +1611,10 @@ class Cursor {
     var yhxingxi=document.createElement("div")
     yhxingxi.id="yhxingxi"
     yhxingxi.innerHTML="用户ID:"+yonghuid+"&nbsp;等级:"+Math.floor(parseInt(localStorage.getItem("yonghujingyian"))/200)
+  //ajax
+   var ajax= setInterval(()=>{
+        yhxingxi.innerHTML="用户ID:"+yonghuid+"&nbsp;等级:"+Math.floor(parseInt(localStorage.getItem("yonghujingyian"))/200)
+    },2000)
     document.body.appendChild(yhxingxi)
     var shangdian=document.createElement("div")
     var shangdiantext=document.createElement("div")
@@ -1677,9 +1724,9 @@ class Cursor {
         playgamebutton.onclick=function(){
             switch(gamexz){
                 case '1':
-                    break;
+                IFRAME("1.html");break;
                 case '2':
-                   IFRAME("math.html");break;
+                ALERT("开发中!!!&nbsp;&nbsp;敬请期待!");break;
                 case '3':
                 ALERT("开发中!!!&nbsp;&nbsp;敬请期待!");break;
                 default:
@@ -1690,29 +1737,47 @@ class Cursor {
             var Alertbody = document.createElement("div")
             var Alerttext=document.createElement("div")
             var Alertbutton=document.createElement("div")
+            var Title=document.createElement("div")
             Alertbody.id="Alertbody"
             Alerttext.id="Alerttext"
             Alertbutton.id="Alertbutton"
+            Title.id='Title'
+            Title.innerHTML="提示"
             Alertbody.style.width=innerWidth+"px"
             Alertbody.style.height=innerHeight+"px"
-            Alerttext.style.height=innerHeight*0.55+"px"
-            Alerttext.style.width=innerWidth*0.4+"px"
+            Alerttext.style.height=innerHeight*0.6+"px"
+            Alerttext.style.width=innerWidth*0.5+"px"
             Alerttext.style.top=(innerHeight-innerHeight*0.5)/2+"px"
-            Alerttext.innerHTML=ast
+            Alerttext.innerHTML=`<div id='tding'>${ast}</div>`
             Alertbutton.innerHTML="确定"
             document.body.appendChild(Alertbody)
             Alertbody.appendChild(Alerttext)
             Alerttext.appendChild(Alertbutton)
+            Alerttext.appendChild(Title)
             Alertbutton.onclick=function(){
                 document.body.removeChild(Alertbody)
             }
         }
         function IFRAME(url){
+            var cursor=document.getElementById("cursor")
+            cursor.style.display="none"
         var  Iframe=  document.createElement("iframe")
-        Iframe.width=innerWidth+"px"
-        Iframe.height=innerHeight+"px"
+        Iframe.width="100%"//window.screen.width+"px"
+        Iframe.height="100%"//window.screen.height+"px"
         Iframe.src=url
+        Iframe.frameBorder=0
+        Iframe.scrolling="no"
+        Iframe.allowtransparency="no"
         document.body.appendChild(Iframe)
+        var Iframequxiao=document.createElement("img")
+            Iframequxiao.id="Iframequxiao"
+            Iframequxiao.src="https://gd-hbimg.huaban.com/fa6925d13920a2b3d629dbc3863d6c890323379355f8-fRASr3_fw658"
+            document.body.appendChild(Iframequxiao)
+            Iframequxiao.onclick=function(){
+                document.body.removeChild(Iframe)
+                document.body.removeChild(Iframequxiao)
+                cursor.style.display="block"
+            }
         }
         var yxmssrc=["https://imgo.hackhome.com/img2021/10/4/0/531064099.jpg","https://img.kxdw.com/2023/0213/20230213090032442.jpg","https://ts1.cn.mm.bing.net/th/id/R-C.1330d78e58a7d1f3ba59afe7ed95e0fa?rik=31TO1CrITvsDcA&riu=http%3a%2f%2fimg.kxdw.com%2f2023%2f0213%2f20230213085326453.jpg&ehk=mqsnXuKg6lJqmMZqXfVMCyTQAkAZLxRQ2by2bmEB%2bWk%3d&risl=&pid=ImgRaw&r=0"]
         var yxmstext=["双人模式","人机大战","匹配对战"]
